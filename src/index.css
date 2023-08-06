@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Prata';
+  src: url("./assets/fonts/Prata/Prata-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url("./assets/fonts/Montserrat/Montserrat-Regular.ttf") format("truetype");
+}
+
+:root {
+  --heightAnimation: 0px;
+  font-family: 'Prata', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #212121;
+  color-scheme: light dark;
+  background-color: #FFF;
+}
+
+html {
+  min-width: 320px;
+}
+
+body {
+  margin: 0;
+}

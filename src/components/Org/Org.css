@@ -1,0 +1,52 @@
+.Org {
+    position: relative;
+    width: 100%;
+}
+
+.Org h3 {
+    width: fit-content;
+    color: #6278F7;
+    text-align: center;
+    font-family: 'Prata';
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 72px;
+    padding-bottom: 19px;
+    border-bottom: 4px solid #6278F7;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+.Org button[type="button"] {
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    top: 0;
+    right: 5%;
+    top: 50%;
+    cursor: pointer;
+    border: 3px solid #FFF;
+    border-radius: 100%;
+    box-shadow: 1px 4px 10px rgb(0, 0, 0, 0.4);
+    transform: translate(-5%, -50%);
+    background-image: url("/images/add_layer.svg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    outline: none;
+}
+
+@media screen and (max-width: 767px) {
+    .Org {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+    .Org button[type="button"] {
+        position: initial;
+        transform: translate(0, 0);
+    }
+}
