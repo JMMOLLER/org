@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from "react";
 import "./Org.css";
-
+import { useEffect } from "react";
 import { useState } from "react";
 
 export function OrgTitle(props) {

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import "./InputComponents.css"
-import { useState } from "react"
+import "./InputComponents.css";
+import { useState } from "react";
 
 // type props {
 //     id: String,
@@ -9,87 +9,116 @@ import { useState } from "react"
 //     type: String,
 //     isRequired: Boolean,
 //     placeholder: String,
-//     optionsTeams: Array
+//     optionsTeams: Array,
+//     value: String,
+//     setValue: Function
 // }
 
-export function InputText(props/*: props*/) {
-    try{
+export function InputText(props /*: props*/) {
+    try {
         const response = validateInputTextProps(props);
 
-        if(!response.isValid) throw new Error(response.msg);
+        if (!response.isValid) throw new Error(response.msg);
+
+        const handleChnage = (e) => {
+            props.setValue(e.target.value);
+        };
 
         return (
             <div className="container_group_form">
                 <label htmlFor={props.id}>{props.text}</label>
-                <input type={props.type} placeholder={props.placeholder} name={props.name} id={props.id} required={props.isRequired} />
+                <input
+                    type={props.type}
+                    placeholder={props.placeholder}
+                    name={props.name}
+                    id={props.id}
+                    onChange={handleChnage}
+                    value={props.value}
+                    required={props.isRequired}
+                />
             </div>
         );
-    }catch(err){
+    } catch (err) {
         console.warn(err);
         return null;
     }
 }
 
-export function InputSelect(props/*:  props*/){
+export function InputSelect(props /*:  props*/) {
     const [active, setActive] = useState(false);
-    const [selected, setSelected] = useState("0");
 
-    try{
+    try {
         const response = validateInputSelectProps(props);
 
-        if(!response.isValid) throw new Error(response.msg);
+        if (!response.isValid) throw new Error(response.msg);
 
         const handleInputSelectChange = (e) => {
-            if(active && e.target.selectedIndex === 0) e.target.selectedIndex = selected;
-            
-            else if(e.target.selectedIndex !== 0) {
+            // Prevents selecting the default option.
+            if (active && e.target.selectedIndex === 0)
+                e.target.selectedIndex = props.value;
+            else if (e.target.selectedIndex !== 0) {
                 e.target.dataset.default = false;
-                setSelected(e.target.selectedIndex);
-                setActive(true)
+                props.setValue(e.target.value);
+                setActive(true);
             }
-        }
+        };
 
         return (
             <div className="container_group_form">
                 <label htmlFor={props.id}>{props.text}</label>
-                <select name={props.name} id={props.id} data-default={true} required={props.isRequired} onChange={handleInputSelectChange}>
-                    <option value="" disabled={active}>Seleccionar equipo</option>
-                    {props.optionsTeams.map((team, index) => <option key={index} value={index}>{team}</option>)}
+                <select
+                    name={props.name}
+                    id={props.id}
+                    data-default={true}
+                    required={props.isRequired}
+                    onChange={handleInputSelectChange}
+                    value={props.value}
+                >
+                    <option value="" disabled={active}>
+                        Seleccionar equipo
+                    </option>
+                    {props.optionsTeams.map((team, index) => (
+                        <option key={index} value={team}>
+                            {team}
+                        </option>
+                    ))}
                 </select>
             </div>
         );
-    }catch(err){
+    } catch (err) {
         console.warn(err);
         return null;
     }
 }
 
-function validateInputTextProps(props/*: props*/){
+function validateInputTextProps(props /*: props*/) {
     const response = {
         isValid: false,
-        msg: ""
-    }
+        msg: "",
+    };
 
-    if(!props.id) response.msg = "Field 'id' is missing."
-    else if(!props.name) response.msg = "Field 'name' is missing."
-    else if(!props.text) response.msg = "Field 'text' is missing."
-    else if(!props.type) response.msg = "Field 'type' is missing."
-    else if(!props.placeholder) response.msg = "Field 'placeholder' is missing."
+    if (!props.id) response.msg = "Field 'id' is missing.";
+    else if (!props.name) response.msg = "Field 'name' is missing.";
+    else if (!props.text) response.msg = "Field 'text' is missing.";
+    else if (!props.type) response.msg = "Field 'type' is missing.";
+    else if (!props.placeholder)
+        response.msg = "Field 'placeholder' is missing.";
     else response.isValid = true;
 
     return response;
 }
 
-function validateInputSelectProps(props/*: props*/){
+function validateInputSelectProps(props /*: props*/) {
     const response = {
         isValid: false,
-        msg: ""
-    }
+        msg: "",
+    };
 
-    if(!props.id) response.msg = "Field 'id' is missing."
-    else if(!props.name) response.msg = "Field 'name' is missing."
-    else if(!props.text) response.msg = "Field 'text' is missing."
-    else if(!Array.isArray(props.optionsTeams)) response.msg = "Field 'optionsTeams' must be an Array."
+    if (!props.id) response.msg = "Field 'id' is missing.";
+    else if (!props.name) response.msg = "Field 'name' is missing.";
+    else if (!props.text) response.msg = "Field 'text' is missing.";
+    else if (!Array.isArray(props.optionsTeams))
+        response.msg = "Field 'optionsTeams' must be an Array.";
     else response.isValid = true;
 
     return response;

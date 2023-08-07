@@ -1,16 +1,60 @@
-.section {
-    width: calc(100% - 2rem);
+section {
+    width: 100%;
     padding: 2.5625rem 1rem;
+    box-sizing: border-box;
 }
+
 
 .animateToTop {
     position: absolute;
     animation: animateToTop 1s ease-in-out forwards;
 }
-
 .animateToBottom {
     position: absolute;
     animation: animateToBottom 1s ease-in-out forwards;
+}
+
+
+.section_teams {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.section_card_content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: #212121;
+    gap: 24px;
+}
+.title_section {
+    display: flex;
+    width: 100%;
+}
+.section_card_content h2 {
+    width: -moz-fit-content;
+    width: fit-content;
+    font-family: 'Prata';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 0 10px;
+    margin: 0 auto;
+    margin-bottom: 14px;
+}
+.section_card_content.programming {
+    background-color: #D9F7E9;
+}
+.section_card_content.programming h2 {
+    border-bottom: 4px solid #57C278;
+}
+.section_card_content.devops {
+    background-color: #F1616526;
+}
+.section_card_content.devops h2 {
+    border-bottom: 4px solid #E06B69;
 }
 
 @keyframes animateToTop {

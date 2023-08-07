@@ -2,9 +2,7 @@
 export default function Main({ children }) {
 
     return (
-        <main style={{
-            position: "relative",
-        }}>
+        <main>
             {children}
         </main>
     )

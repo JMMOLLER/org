@@ -1,0 +1,63 @@
+.Card {
+    position: relative;
+    width: 262px;
+    height: 272px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #fff;
+    gap: 27.77px;
+    overflow: hidden;
+    padding: 0.2rem;
+    box-sizing: border-box;
+}
+
+.header_card {
+    position: absolute;
+    width: 100%;
+    height: 92px;
+    border-radius: 10px 10px 0px 0px;
+    top: 0;
+    z-index: 0;
+}
+.section_card_content.programming .header_card {
+    background-color: #57c278;
+}
+.section_card_content.devops .header_card {
+    background-color: #E06B69;
+}
+.Card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    z-index: 1;
+}
+.Card .content_card {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    gap: 10px;
+}
+.Card .content_card h3 {
+    color: #6278f7;
+    text-align: center;
+    font-family: "Montserrat";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+.Card .content_card p {
+    word-break: break-all;
+    color: #212121;
+    text-align: center;
+    font-family: "Montserrat";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+}
