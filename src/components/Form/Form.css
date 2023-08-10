@@ -9,7 +9,6 @@ form {
     box-shadow: 7px 7px 15px 0px rgba(0, 0, 0, 0.08);
     padding: 35px 95px;
     box-sizing: border-box;
-    animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 .form_title {
@@ -17,27 +16,6 @@ form {
     margin: 0;
 }
 
-.close {
-    animation: fadeOut 0.5s ease-in-out forwards;
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     form {

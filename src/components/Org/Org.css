@@ -1,9 +1,13 @@
-.Org {
+.section_teams {
+    padding: 2.5625rem 0;
+}
+
+.teams_header {
     position: relative;
     width: 100%;
     margin-bottom: 4.687rem;
 }
-.Org h3 {
+.teams_header h3 {
     width: -moz-fit-content; /* added support for Firefox */
     width: fit-content;
     color: #6278f7;
@@ -19,7 +23,7 @@
     margin: 0 auto;
 }
 
-.Org button[type="button"] {
+.teams_header button[type="button"] {
     width: 90px;
     height: 90px;
     position: absolute;
@@ -39,14 +43,14 @@
 }
 
 @media screen and (max-width: 767px) {
-    .Org {
+    .teams_header {
         display: flex;
         flex-direction: column-reverse;
         justify-content: center;
         align-items: center;
         gap: 20px;
     }
-    .Org button[type="button"] {
+    .teams_header button[type="button"] {
         position: initial;
         transform: translate(0, 0);
     }
