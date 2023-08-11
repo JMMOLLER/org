@@ -5,11 +5,14 @@ import Main from './components/Main/Main'
 import Form from './components/Form/Form'
 import Hero from './components/Hero/Hero'
 import './App.css'
+import Modal from './components/Modal'
+import { useEffect } from 'react'
 
 function App() {
 
   const [showForm, setShowForm] = useState(true);
   const [helpers, setHelpers] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const teams = [
     {
@@ -63,21 +66,28 @@ function App() {
     },
   ];
 
+  useEffect(() => {
+    document.body.style.overflow = showModal ? "hidden" : "";
+  }, [showModal]);
+
   const handleRegister = (data) => {
     setHelpers([...helpers, data]);
   }
 
   return (
     <>
+      {showModal && Modal({ setShowModal })}
       <Header>
         <Hero />
       </Header>
       <Main>
-        <Form showForm={showForm} teams={teams} handleRegister={handleRegister} />
+        <Form showForm={showForm} teams={teams} handleRegister={handleRegister} setShowModal={setShowModal} />
         <OrgTitle showForm={showForm} setShowForm={setShowForm} teams={teams} helpers={helpers} />
       </Main>
     </>
   )
 }
+
+
 
 export default App

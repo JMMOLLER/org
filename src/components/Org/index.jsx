@@ -46,10 +46,7 @@ export default function OrgTitle({ showForm, setShowForm, teams, helpers }) {
                     onClick={handleClick}
                 ></button>
             </div>
-            { helpers.map((helper, index) => {
-                const team = teams.find((team) => team.teamName === helper.team);
-                return <Team key={index} helper={helper} dataTeams={team} />
-            }) }
+            { teams.map((team) => <Team key={team.teamName} helpers={helpers.filter((helper) => helper.team === team.teamName)} dataTeams={team} />) }
         </animated.section>
     );
 }

@@ -5,13 +5,15 @@ import { InputText, InputSelect } from "../InputComponents";
 import { useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useEffect } from "react";
+import { useRef } from "react";
 
-export default function Form({ showForm, teams, handleRegister }) {
+export default function Form({ showForm, teams, handleRegister, setShowModal }) {
     const [name, setName] = useState("");
     const [position, setPosition] = useState("");
     const [photo, setPhoto] = useState("");
     const [team, setTeam] = useState("");
     const [isAnimating, setIsAnimating] = useState(false);
+    const section = useRef(null);
 
     const springs = useSpring({
         to: { opacity: isAnimating ? 1 : 0 },
@@ -21,8 +23,17 @@ export default function Form({ showForm, teams, handleRegister }) {
         setIsAnimating(showForm);
     }, [showForm]);
 
+    const validateForm = (formData) => {
+        const { name, position, photo, team } = formData;
+        if (name && position && photo && team) {
+            return true;
+        }
+        return false;
+    };
+
     const handleFormSubmit = (e) => {
         e.preventDefault();
+        if (!validateForm({ name, position, photo, team })) return handleFormError();
         const data = {
             name,
             position,
@@ -32,8 +43,14 @@ export default function Form({ showForm, teams, handleRegister }) {
         handleRegister(data);
     };
 
+    const handleFormError = () => {
+        const el = section.current;
+        el.scrollIntoView({ behavior: "smooth" });
+        setShowModal(true);
+    };
+
     return (
-        <animated.section className="section_form" style={springs}>
+        <animated.section className="section_form" style={springs} ref={section}>
             <form onSubmit={handleFormSubmit}>
                 <h2 className="form_title">
                     Rellena el formulario para añadir un colaborador

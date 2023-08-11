@@ -1,24 +1,22 @@
 import "./Card.css";
 
 import PropTypes from 'prop-types';
-export default function Card(props) {
+export default function Card({ dataHelper, bgColor }) {
     return (
         <div className="Card">
-            <div className="header_card" style={{backgroundColor: props.bgColor}}>
-                <img src={props.img} alt={"image profile"} />
+            <div className="header_card" style={{backgroundColor: bgColor}}>
+                <img src={dataHelper.photo} alt={"image profile"} />
             </div>
             <div className="content_card">
-                <h3>{props.fullName}</h3>
-                <p>{props.position}</p>
+                <h3>{dataHelper.name}</h3>
+                <p>{dataHelper.position}</p>
             </div>
         </div>
     );
 }
 
 Card.propTypes = {
-    bgColor: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
-    position: PropTypes.string.isRequired
+    dataHelper: PropTypes.object.isRequired,
+    bgColor: PropTypes.string.isRequired
 };
 
