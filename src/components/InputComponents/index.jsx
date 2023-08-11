@@ -77,11 +77,11 @@ export function InputSelect(props /*:  props*/) {
                     <option value="" disabled={active}>
                         Seleccionar equipo
                     </option>
-                    {props.optionsTeams.map((team, index) => (
-                        <option key={index} value={team}>
-                            {team}
+                    {props.optionsTeams.map((team, index) => 
+                        <option key={index} value={team.teamName}>
+                            {team.teamName}
                         </option>
-                    ))}
+                    )}
                 </select>
             </div>
         );

@@ -22,9 +22,3 @@ Card.propTypes = {
     position: PropTypes.string.isRequired
 };
 
-Card.propTypes = {
-    bgColor: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
-    position: PropTypes.string.isRequired
-};

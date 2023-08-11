@@ -9,6 +9,7 @@ import './App.css'
 function App() {
 
   const [showForm, setShowForm] = useState(true);
+  const [helpers, setHelpers] = useState([]);
 
   const teams = [
     {
@@ -62,15 +63,18 @@ function App() {
     },
   ];
 
+  const handleRegister = (data) => {
+    setHelpers([...helpers, data]);
+  }
+
   return (
     <>
       <Header>
         <Hero />
       </Header>
       <Main>
-        <Form showForm={showForm} />
-        <OrgTitle showForm={showForm} setShowForm={setShowForm} teams={teams} >
-        </OrgTitle>
+        <Form showForm={showForm} teams={teams} handleRegister={handleRegister} />
+        <OrgTitle showForm={showForm} setShowForm={setShowForm} teams={teams} helpers={helpers} />
       </Main>
     </>
   )

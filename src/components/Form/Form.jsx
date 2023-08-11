@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useEffect } from "react";
 
-export default function Form({ showForm }) {
+export default function Form({ showForm, teams, handleRegister }) {
     const [name, setName] = useState("");
     const [position, setPosition] = useState("");
     const [photo, setPhoto] = useState("");
@@ -21,16 +21,6 @@ export default function Form({ showForm }) {
         setIsAnimating(showForm);
     }, [showForm]);
 
-    const teams = [
-        "Programación",
-        "Front End",
-        "Data Science",
-        "Devops",
-        "UX y Diseño",
-        "Móvil",
-        "Innovación y Gestión",
-    ];
-
     const handleFormSubmit = (e) => {
         e.preventDefault();
         const data = {
@@ -39,7 +29,7 @@ export default function Form({ showForm }) {
             photo,
             team,
         };
-        console.log("Formulario enviado", data);
+        handleRegister(data);
     };
 
     return (
