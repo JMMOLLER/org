@@ -12,7 +12,7 @@ import Footer from './components/Footer'
 function App() {
 
   const [showForm, setShowForm] = useState(true);
-  const [helpers, setHelpers] = useState([{name: "Jorge Moreno", position: "Desarrollador FullStack", photo: "https://github.com/JMMOLLER.png", team: "Programación"}]);
+  const [helpers, setHelpers] = useState([{name: "Jorge Moreno", position: "Desarrollador FullStack", photo: "https://github.com/JMMOLLER.png", team: "Front End"}]);
   const [showModal, setShowModal] = useState(false);
   const nodeOrgRef = useRef(null);
 
