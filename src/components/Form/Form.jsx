@@ -2,26 +2,17 @@
 import "./Form.css";
 import Button from "../Button/Button";
 import { InputText, InputSelect } from "../InputComponents";
-import { useState } from "react";
-import { useSpring, animated } from "@react-spring/web";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 
-export default function Form({ showForm, teams, handleRegister, setShowModal }) {
+
+import { CSSTransition } from 'react-transition-group';
+
+export default function Form({ showForm, teams, handleRegister, setShowModal, nodeOrgRef }) {
     const [name, setName] = useState("");
     const [position, setPosition] = useState("");
     const [photo, setPhoto] = useState("");
     const [team, setTeam] = useState("");
-    const [isAnimating, setIsAnimating] = useState(false);
-    const section = useRef(null);
-
-    const springs = useSpring({
-        to: { opacity: isAnimating ? 1 : 0 },
-    });
-
-    useEffect(() => {
-        setIsAnimating(showForm);
-    }, [showForm]);
+    const nodeRef = useRef(null);
 
     const validateForm = (formData) => {
         const { name, position, photo, team } = formData;
@@ -44,58 +35,68 @@ export default function Form({ showForm, teams, handleRegister, setShowModal }) 
     };
 
     const handleFormError = () => {
-        const el = section.current;
+        const el = nodeRef.current;
         el.scrollIntoView({ behavior: "smooth" });
         setShowModal(true);
     };
 
+    const handleExited = () => {
+        nodeOrgRef.current.style = {};
+    }
+
+    const handleEntering = () => {
+        nodeRef.current.classList.add("hidden");
+    };
+
     return (
-        <animated.section className="section_form" style={springs} ref={section}>
-            <form onSubmit={handleFormSubmit}>
-                <h2 className="form_title">
-                    Rellena el formulario para añadir un colaborador
-                </h2>
-                <InputText
-                    type="text"
-                    name="name"
-                    id="name"
-                    placeholder="Ingrese el nombre"
-                    text="Nombre"
-                    value={name}
-                    setValue={setName}
-                    isRequired={true}
-                />
-                <InputText
-                    type="text"
-                    name="position"
-                    id="position"
-                    placeholder="Ingrese el puesto"
-                    text="Puesto"
-                    value={position}
-                    setValue={setPosition}
-                    isRequired={true}
-                />
-                <InputText
-                    type="url"
-                    name="photo"
-                    id="photo"
-                    placeholder="Ingrese la url de la foto"
-                    text="Foto"
-                    value={photo}
-                    setValue={setPhoto}
-                    isRequired={true}
-                />
-                <InputSelect
-                    name="team"
-                    id="team"
-                    text="Equipo"
-                    isRequired={true}
-                    value={team}
-                    setValue={setTeam}
-                    optionsTeams={teams}
-                />
-                <Button type="submit" text="Crear" />
-            </form>
-        </animated.section>
+        <CSSTransition in={showForm} nodeRef={nodeRef} timeout={1000} classNames={"fade"} unmountOnExit onExited={handleExited} onEntering={handleEntering}>
+            <section className="section_form" ref={nodeRef}>
+                <form onSubmit={handleFormSubmit}>
+                    <h2 className="form_title">
+                        Rellena el formulario para añadir un colaborador
+                    </h2>
+                    <InputText
+                        type="text"
+                        name="name"
+                        id="name"
+                        placeholder="Ingrese el nombre"
+                        text="Nombre"
+                        value={name}
+                        setValue={setName}
+                        isRequired={true}
+                    />
+                    <InputText
+                        type="text"
+                        name="position"
+                        id="position"
+                        placeholder="Ingrese el puesto"
+                        text="Puesto"
+                        value={position}
+                        setValue={setPosition}
+                        isRequired={true}
+                    />
+                    <InputText
+                        type="url"
+                        name="photo"
+                        id="photo"
+                        placeholder="Ingrese la url de la foto"
+                        text="Foto"
+                        value={photo}
+                        setValue={setPhoto}
+                        isRequired={true}
+                    />
+                    <InputSelect
+                        name="team"
+                        id="team"
+                        text="Equipo"
+                        isRequired={true}
+                        value={team}
+                        setValue={setTeam}
+                        optionsTeams={teams}
+                    />
+                    <Button type="submit" text="Crear" />
+                </form>
+            </section>
+        </CSSTransition>
     );
 }

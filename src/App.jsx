@@ -6,13 +6,15 @@ import Form from './components/Form/Form'
 import Hero from './components/Hero/Hero'
 import './App.css'
 import Modal from './components/Modal'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import Footer from './components/Footer'
 
 function App() {
 
   const [showForm, setShowForm] = useState(true);
-  const [helpers, setHelpers] = useState([]);
+  const [helpers, setHelpers] = useState([{name: "Jorge Moreno", position: "Desarrollador FullStack", photo: "https://github.com/JMMOLLER.png", team: "Programación"}]);
   const [showModal, setShowModal] = useState(false);
+  const nodeOrgRef = useRef(null);
 
   const teams = [
     {
@@ -81,9 +83,10 @@ function App() {
         <Hero />
       </Header>
       <Main>
-        <Form showForm={showForm} teams={teams} handleRegister={handleRegister} setShowModal={setShowModal} />
-        <OrgTitle showForm={showForm} setShowForm={setShowForm} teams={teams} helpers={helpers} />
+        <Form showForm={showForm} setShowForm={setShowForm} teams={teams} handleRegister={handleRegister} nodeOrgRef={nodeOrgRef} setShowModal={setShowModal} />
+        <OrgTitle showForm={showForm} setShowForm={setShowForm} teams={teams} nodeOrgRef={nodeOrgRef} helpers={helpers} />
       </Main>
+      <Footer />
     </>
   )
 }
