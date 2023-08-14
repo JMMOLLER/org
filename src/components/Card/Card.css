@@ -23,6 +23,8 @@
     height: 120px;
     border-radius: 100%;
     margin-top: 32px;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .Card .content_card {
     display: flex;

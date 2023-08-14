@@ -6,6 +6,7 @@ import Form from './components/Form/Form'
 import Hero from './components/Hero/Hero'
 import Modal from './components/Modal'
 import Footer from './components/Footer'
+import shortid from 'shortid'
 import './App.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   const [helpers, setHelpers] = useState([{name: "Jorge Moreno", position: "Desarrollador FullStack", photo: "https://github.com/JMMOLLER.png", team: "Front End"}]);
   const [dataTeams, setDataTeams] = useState([
     {
+      id: shortid.generate(),
       teamName: "Programación",
       colors: {
         primary: "#57c278",
@@ -21,6 +23,7 @@ function App() {
       }
     },
     {
+      id: shortid.generate(),
       teamName: "Front End",
       colors: {
         primary: "#82CFFA",
@@ -28,6 +31,7 @@ function App() {
       }
     },
     {
+      id: shortid.generate(),
       teamName: "Data Science",
       colors: {
         primary: "#A6D157",
@@ -35,6 +39,7 @@ function App() {
       }
     },
     {
+      id: shortid.generate(),
       teamName: "Devops",
       colors: {
         primary: "#E06B69",
@@ -42,6 +47,7 @@ function App() {
       }
     },
     {
+      id: shortid.generate(),
       teamName: "UX y Diseño",
       colors: {
         primary: "#DB6EBF",
@@ -49,6 +55,7 @@ function App() {
       }
     },
     {
+      id: shortid.generate(),
       teamName: "Móvil",
       colors: {
         primary: "#FFBA05",
@@ -56,6 +63,7 @@ function App() {
       }
     },
     {
+      id: shortid.generate(),
       teamName: "Innovación y Gestión",
       colors: {
         primary: "#FF8A29",
@@ -78,9 +86,9 @@ function App() {
     console.log("Se eliminó a: ", helper);
   }
 
-  const changeTeamColor = (teamName, color) => {
+  const changeTeamColor = (teamId, color) => {
     setDataTeams(dataTeams.map((item) => {
-      if (item.teamName === teamName) {
+      if (item.id === teamId) {
         item.colors.primary = color;
         item.colors.background = color + "26";
       }

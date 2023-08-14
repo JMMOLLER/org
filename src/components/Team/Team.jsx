@@ -7,7 +7,7 @@ export default function Team({ dataTeam, helpers, deleteHelper, changeTeamColor 
     // const urlImg = "https://avatars.githubusercontent.com/u/86493703?v=4";
 
     const handleChangeColor = (e) => {
-        changeTeamColor(dataTeam.teamName, e.target.value);
+        changeTeamColor(dataTeam.id, e.target.value);
     }
 
     return (
