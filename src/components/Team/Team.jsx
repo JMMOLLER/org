@@ -4,7 +4,7 @@ import Card from "../Card/Card";
 import PropTypes from "prop-types";
 import "./Team.css";
 
-export default function Team({ dataTeams, helpers }) {
+export default function Team({ dataTeams, helpers, deleteHelper }) {
     // const urlImg = "https://avatars.githubusercontent.com/u/86493703?v=4"
 
     return (
@@ -28,6 +28,7 @@ export default function Team({ dataTeams, helpers }) {
                             key={index}
                             bgColor={dataTeams.colors?.primary}
                             dataHelper={helper}
+                            deleteHelper={deleteHelper}
                         />
                     ))}
                 </section>
@@ -39,4 +40,5 @@ export default function Team({ dataTeams, helpers }) {
 Team.propTypes = {
     dataTeams: PropTypes.object.isRequired,
     helpers: PropTypes.array.isRequired,
+    deleteHelper: PropTypes.func.isRequired,
 };

@@ -76,6 +76,10 @@ function App() {
     setHelpers([...helpers, data]);
   }
 
+  const deleteHelper = (helper) => {
+    console.log("Se eliminó a: ", helper);
+  }
+
   return (
     <>
       {showModal && Modal({ setShowModal })}
@@ -83,8 +87,22 @@ function App() {
         <Hero />
       </Header>
       <Main>
-        <Form showForm={showForm} setShowForm={setShowForm} teams={teams} handleRegister={handleRegister} nodeOrgRef={nodeOrgRef} setShowModal={setShowModal} />
-        <OrgTitle showForm={showForm} setShowForm={setShowForm} teams={teams} nodeOrgRef={nodeOrgRef} helpers={helpers} />
+        <Form
+          showForm={showForm}
+          setShowForm={setShowForm}
+          teams={teams}
+          handleRegister={handleRegister}
+          nodeOrgRef={nodeOrgRef}
+          setShowModal={setShowModal}
+        />
+        <OrgTitle
+          showForm={showForm}
+          setShowForm={setShowForm}
+          teams={teams}
+          nodeOrgRef={nodeOrgRef}
+          helpers={helpers}
+          deleteHelper={deleteHelper}
+        />
       </Main>
       <Footer />
     </>

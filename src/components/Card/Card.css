@@ -7,8 +7,8 @@
     border-radius: 10px;
     background-color: #fff;
     gap: 70.77px;
-    overflow: hidden;
     box-sizing: border-box;
+    position: relative;
 }
 
 .header_card {
@@ -62,9 +62,16 @@
     margin: 0;
     overflow: hidden;
 }
-.section_card_content.programming .header_card {
-    background-color: #57c278;
+
+.icon {
+    all: unset;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: -20px;
+    top: -30px;
 }
-.section_card_content.devops .header_card {
-    background-color: #E06B69;
+
+.icon:hover {
+    cursor: pointer;
 }

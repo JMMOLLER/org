@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 
 export default function OrgTitle(props) {
-    const { showForm, setShowForm, teams, helpers, nodeOrgRef } = props;
+    const { showForm, setShowForm, teams, helpers, nodeOrgRef, deleteHelper } = props;
 
     useEffect(() => {
         const offsetTop = -document.querySelector(".section_teams").offsetTop;
@@ -48,6 +48,7 @@ export default function OrgTitle(props) {
                         (helper) => helper.team === team.teamName
                     )}
                     dataTeams={team}
+                    deleteHelper={deleteHelper}
                 />
             ))}
         </section>
@@ -60,4 +61,5 @@ OrgTitle.propTypes = {
     teams: PropTypes.array.isRequired,
     helpers: PropTypes.array.isRequired,
     nodeOrgRef: PropTypes.shape({ current: PropTypes.any }),
+    deleteHelper: PropTypes.func.isRequired,
 };
