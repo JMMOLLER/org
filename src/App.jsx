@@ -12,7 +12,15 @@ import './App.css'
 function App() {
 
   const [showForm, setShowForm] = useState(true);
-  const [helpers, setHelpers] = useState([{name: "Jorge Moreno", position: "Desarrollador FullStack", photo: "https://github.com/JMMOLLER.png", team: "Front End"}]);
+  const [helpers, setHelpers] = useState([
+    {
+      id: shortid.generate(),
+      name: "Jorge Moreno",
+      position: "Desarrollador FullStack",
+      photo: "https://github.com/JMMOLLER.png",
+      team: "Front End"
+    }
+  ]);
   const [dataTeams, setDataTeams] = useState([
     {
       id: shortid.generate(),
@@ -82,8 +90,8 @@ function App() {
     setHelpers([...helpers, data]);
   }
 
-  const deleteHelper = (helper) => {
-    console.log("Se eliminó a: ", helper);
+  const deleteHelper = (helperId) => {
+    setHelpers(helpers.filter((helper) => helper.id !== helperId));
   }
 
   const changeTeamColor = (teamId, color) => {

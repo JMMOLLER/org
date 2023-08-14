@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./Form.css";
+import shortid from 'shortid';
 import Button from "../Button/Button";
 import { InputText, InputSelect } from "../InputComponents";
 import { useState, useRef } from "react";
@@ -26,6 +27,7 @@ export default function Form({ showForm, teams, handleRegister, setShowModal, no
         e.preventDefault();
         if (!validateForm({ name, position, photo, team })) return handleFormError();
         const data = {
+            id: shortid.generate(),
             name,
             position,
             photo,

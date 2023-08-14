@@ -24,7 +24,7 @@ export default function Card({ dataHelper, bgColor, deleteHelper }) {
 
     const handleClick = (e) => {
         e.preventDefault();
-        deleteHelper(dataHelper.name);
+        deleteHelper(dataHelper.id);
     };
 
     const handleMouseEnter = () => {
