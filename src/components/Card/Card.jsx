@@ -7,18 +7,21 @@ import PropTypes from "prop-types";
 
 export default function Card({ dataHelper, bgColor, deleteHelper }) {
     const iconRef = useRef(null);
+    const lottieInstance = useRef(null);
 
     useEffect(() => {
-        lottie.loadAnimation({
+        lottieInstance.current = lottie.loadAnimation({
             container: iconRef.current,
             renderer: "svg",
             loop: true,
             autoplay: false,
             animationData,
         });
-
+        
         return () => {
-            lottie.destroy();
+            if(lottieInstance.current) {
+                lottieInstance.current.destroy();
+            }
         };
     }, []);
 
@@ -28,11 +31,11 @@ export default function Card({ dataHelper, bgColor, deleteHelper }) {
     };
 
     const handleMouseEnter = () => {
-        lottie.play();
+        lottieInstance.current.play();
     };
 
     const handleMouseLeave = () => {
-        lottie.stop();
+        lottieInstance.current.stop();
     };
 
     return (
