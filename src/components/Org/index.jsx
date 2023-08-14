@@ -4,14 +4,35 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 
 export default function OrgTitle(props) {
-    const { showForm, setShowForm, teams, helpers, nodeOrgRef, deleteHelper } = props;
+    const {
+        showForm,
+        setShowForm,
+        teams,
+        helpers,
+        nodeOrgRef,
+        deleteHelper,
+        changeTeamColor,
+    } = props;
 
     useEffect(() => {
         const offsetTop = -document.querySelector(".section_teams").offsetTop;
+        animateFormTransition(nodeOrgRef, showForm, offsetTop);
+    }, [showForm, nodeOrgRef]);
+
+    const handleClick = () => {
+        setShowForm(!showForm);
+    };
+
+    const animateFormTransition = (nodeOrgRef, showForm, offsetTop) => {
         const isInit = nodeOrgRef.current.classList.contains("init");
-        if (isInit) nodeOrgRef.current.classList.remove("init");
+    
+        if (isInit) {
+            nodeOrgRef.current.classList.remove("init");
+        }
+    
         if (showForm && !isInit) {
             nodeOrgRef.current.style.transform = `translateY(${offsetTop}px)`;
+    
             setTimeout(() => {
                 nodeOrgRef.current.style.transition = "transform 1s";
                 nodeOrgRef.current.style.transform = `translateY(0px)`;
@@ -19,16 +40,14 @@ export default function OrgTitle(props) {
         } else {
             nodeOrgRef.current.style.transition = "transform 1s";
             nodeOrgRef.current.style.transform = `translateY(${offsetTop}px)`;
-            if (!isInit && window.innerWidth < 768)
+    
+            if (!isInit && window.innerWidth < 768) {
                 window.scrollTo({
                     top: nodeOrgRef.current.getBoundingClientRect().top,
                     behavior: "smooth",
                 });
+            }
         }
-    }, [showForm, nodeOrgRef]);
-
-    const handleClick = () => {
-        setShowForm(!showForm);
     };
 
     return (
@@ -47,8 +66,9 @@ export default function OrgTitle(props) {
                     helpers={helpers.filter(
                         (helper) => helper.team === team.teamName
                     )}
-                    dataTeams={team}
+                    dataTeam={team}
                     deleteHelper={deleteHelper}
+                    changeTeamColor={changeTeamColor}
                 />
             ))}
         </section>
@@ -62,4 +82,5 @@ OrgTitle.propTypes = {
     helpers: PropTypes.array.isRequired,
     nodeOrgRef: PropTypes.shape({ current: PropTypes.any }),
     deleteHelper: PropTypes.func.isRequired,
+    changeTeamColor: PropTypes.func.isRequired,
 };

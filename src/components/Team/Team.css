@@ -1,4 +1,3 @@
-
 .section_card_content {
     display: flex;
     flex-direction: row;
@@ -6,6 +5,7 @@
     flex-wrap: wrap;
     color: #212121;
     gap: 24px;
+    position: relative;
 }
 .title_section {
     display: flex;
@@ -23,10 +23,7 @@
     margin: 0 auto;
     margin-bottom: 14px;
 }
-
-.section_card_content.programming {
-    background-color: #D9F7E9;
-}
-.section_card_content.programming h2 {
-    border-bottom: 4px solid #57C278;
+.color-picker {
+    position: absolute;
+    right: 15px;
 }

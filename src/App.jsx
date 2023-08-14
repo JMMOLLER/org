@@ -1,22 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import OrgTitle from './components/Org'
 import Header from './components/Header/Header'
 import Main from './components/Main/Main'
 import Form from './components/Form/Form'
 import Hero from './components/Hero/Hero'
-import './App.css'
 import Modal from './components/Modal'
-import { useEffect, useRef } from 'react'
 import Footer from './components/Footer'
+import './App.css'
 
 function App() {
 
   const [showForm, setShowForm] = useState(true);
   const [helpers, setHelpers] = useState([{name: "Jorge Moreno", position: "Desarrollador FullStack", photo: "https://github.com/JMMOLLER.png", team: "Front End"}]);
-  const [showModal, setShowModal] = useState(false);
-  const nodeOrgRef = useRef(null);
-
-  const teams = [
+  const [dataTeams, setDataTeams] = useState([
     {
       teamName: "Programación",
       colors: {
@@ -66,7 +62,9 @@ function App() {
         background: "#FF8C2A26",
       }
     },
-  ];
+  ]);
+  const [showModal, setShowModal] = useState(false);
+  const nodeOrgRef = useRef(null);
 
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "";
@@ -80,6 +78,16 @@ function App() {
     console.log("Se eliminó a: ", helper);
   }
 
+  const changeTeamColor = (teamName, color) => {
+    setDataTeams(dataTeams.map((item) => {
+      if (item.teamName === teamName) {
+        item.colors.primary = color;
+        item.colors.background = color + "26";
+      }
+      return item;
+    }))
+  }
+
   return (
     <>
       {showModal && Modal({ setShowModal })}
@@ -90,7 +98,7 @@ function App() {
         <Form
           showForm={showForm}
           setShowForm={setShowForm}
-          teams={teams}
+          teams={dataTeams}
           handleRegister={handleRegister}
           nodeOrgRef={nodeOrgRef}
           setShowModal={setShowModal}
@@ -98,10 +106,11 @@ function App() {
         <OrgTitle
           showForm={showForm}
           setShowForm={setShowForm}
-          teams={teams}
+          teams={dataTeams}
           nodeOrgRef={nodeOrgRef}
           helpers={helpers}
           deleteHelper={deleteHelper}
+          changeTeamColor={changeTeamColor}
         />
       </Main>
       <Footer />
