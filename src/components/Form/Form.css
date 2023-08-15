@@ -6,9 +6,10 @@ form {
     width: 58.8451%;
     margin: 0 auto;
     border-radius: 20px;
-    box-shadow: 7px 7px 15px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: 9px 7px 15px 9px rgba(0, 0, 0, 0.08);
     padding: 35px 95px;
     box-sizing: border-box;
+    position: relative;
 }
 
 .form_title {
@@ -26,6 +27,45 @@ form {
 
 .fade-enter-done {
     animation: fade_in 1s ease-in forwards;
+}
+
+.toggle_form {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    top: 0;
+    top: 15px;
+    right: -50px;
+    cursor: pointer;
+    border: 3px solid #fff;
+    border-radius: 100%;
+    box-shadow: 1px 4px 10px rgb(0, 0, 0, 0.4);
+    transform: translate(-5%, -50%);
+    outline: none;
+}
+
+.toggle_form::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(/images/toggle_arrow.svg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform-origin: center;
+    border-radius: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.toggle_form:hover::before {
+    transform: rotate(180deg);
+}
+
+.toggle_form:not(:hover) {
+    transition: .5s ease-in-out;
 }
 
 @keyframes fade_in {
@@ -50,10 +90,21 @@ form {
         width: 80%;
         padding: 28px 50px;
     }
+    .toggle_form {
+        width: 74px;
+        height: 74px;
+        top: 0;
+    }
 }
 @media screen and (max-width: 767px) {
     form {
         padding: 35px;
         width: 100%;
+    }
+    .toggle_form {
+        width: 64px;
+        height: 64px;
+        top: 0;
+        right: -10px;
     }
 }

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import OrgTitle from './components/Org'
 import Header from './components/Header/Header'
 import Main from './components/Main/Main'
-import Form from './components/Form/Form'
+import Form from './components/Form'
 import Hero from './components/Hero/Hero'
 import Modal from './components/Modal'
 import Footer from './components/Footer'
@@ -98,10 +98,14 @@ function App() {
     setDataTeams(dataTeams.map((item) => {
       if (item.id === teamId) {
         item.colors.primary = color;
-        item.colors.background = color + "26";
+        item.colors.background = generateBgColor(color);
       }
       return item;
     }))
+  }
+
+  const generateBgColor = (color) => {
+    return color + "26";
   }
 
   return (
@@ -118,6 +122,7 @@ function App() {
           handleRegister={handleRegister}
           nodeOrgRef={nodeOrgRef}
           setShowModal={setShowModal}
+          generateBgColor={generateBgColor}
         />
         <OrgTitle
           showForm={showForm}

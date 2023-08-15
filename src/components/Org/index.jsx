@@ -36,6 +36,10 @@ export default function OrgTitle(props) {
             setTimeout(() => {
                 nodeOrgRef.current.style.transition = "transform 1s";
                 nodeOrgRef.current.style.transform = `translateY(0px)`;
+
+                setTimeout(() => {
+                    nodeOrgRef.current.style = {}
+                }, 1000);
             }, 1);
         } else {
             nodeOrgRef.current.style.transition = "transform 1s";
@@ -58,6 +62,7 @@ export default function OrgTitle(props) {
                     type="button"
                     aria-label="toggle form"
                     onClick={handleClick}
+                    title="alternar mostrar formulario"
                 ></button>
             </div>
             {teams.map((team) => (

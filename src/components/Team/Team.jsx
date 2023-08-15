@@ -3,10 +3,11 @@ import Card from "../Card/Card";
 
 import PropTypes from "prop-types";
 
-export default function Team({ dataTeam, helpers, deleteHelper, changeTeamColor }) {
+export default function Team({ dataTeam, helpers, deleteHelper, changeTeamColor, isPreview }) {
     // const urlImg = "https://avatars.githubusercontent.com/u/86493703?v=4";
 
     const handleChangeColor = (e) => {
+        if(isPreview) return changeTeamColor(e.target.value)
         changeTeamColor(dataTeam.id, e.target.value);
     }
 
@@ -46,4 +47,5 @@ Team.propTypes = {
     helpers: PropTypes.array.isRequired,
     deleteHelper: PropTypes.func.isRequired,
     changeTeamColor: PropTypes.func.isRequired,
+    isPreview: PropTypes.bool,
 };
