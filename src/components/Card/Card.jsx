@@ -1,41 +1,68 @@
 import "./Card.css";
 import lottie from "lottie-web";
-import animationData from "../../assets/lottie/delete-animation.json";
+import deleteAnimation from "../../assets/lottie/delete-animation.json";
+import likeAnimation from "../../assets/lottie/like-animation.json";
 import { useEffect, useRef } from "react";
 
 import PropTypes from "prop-types";
 
 export default function Card({ dataHelper, bgColor, deleteHelper }) {
-    const iconRef = useRef(null);
-    const lottieInstance = useRef(null);
+    const deleteIconRef = useRef(null);
+    const likeIconRef = useRef(null);
+    const lottieInstanceDelete = useRef(null);
+    const lottieInstanceLike = useRef(null);
 
     useEffect(() => {
-        lottieInstance.current = lottie.loadAnimation({
-            container: iconRef.current,
+        lottieInstanceDelete.current = lottie.loadAnimation({
+            container: deleteIconRef.current,
             renderer: "svg",
             loop: true,
             autoplay: false,
-            animationData,
+            animationData: deleteAnimation,
+        });
+
+        lottieInstanceLike.current = lottie.loadAnimation({
+            container: likeIconRef.current,
+            renderer: "svg",
+            loop: false,
+            autoplay: false,
+            animationData: likeAnimation,
         });
         
         return () => {
-            if(lottieInstance.current) {
-                lottieInstance.current.destroy();
+            if(lottieInstanceDelete.current) {
+                lottieInstanceDelete.current.destroy();
+            }if(lottieInstanceLike.current) {
+                lottieInstanceLike.current.destroy();
             }
         };
     }, []);
 
     const handleClick = (e) => {
         e.preventDefault();
+        if(e.currentTarget.classList.contains("delete")) {
+            handleClickDelete();
+        }else if(e.currentTarget.classList.contains("like")) {
+            handleClickLike();
+        }
+        e.stopPropagation();
+    };
+
+    const handleClickDelete = () => {
         deleteHelper(dataHelper.id);
     };
 
+    const handleClickLike = () => {
+        console.log("like");
+        lottieInstanceLike.current.play();
+    };
+
     const handleMouseEnter = () => {
-        lottieInstance.current.play();
+        lottieInstanceDelete.current.play();
     };
 
     const handleMouseLeave = () => {
-        lottieInstance.current.stop();
+        lottieInstanceDelete.current.stop();
     };
 
     return (
@@ -44,12 +71,19 @@ export default function Card({ dataHelper, bgColor, deleteHelper }) {
                 type="button"
                 className="icon delete"
                 onClick={handleClick}
-                ref={iconRef}
+                ref={deleteIconRef}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 title="eliminar colaborador"
             ></button>
             <div className="header_card" style={{ backgroundColor: bgColor }}>
+                <button
+                    type="button"
+                    className="icon like"
+                    onClick={handleClick}
+                    ref={likeIconRef}
+                    title="Agregar a me gusta"
+                ></button>
                 <img src={dataHelper.photo} alt={"image profile"} />
             </div>
             <div className="content_card">

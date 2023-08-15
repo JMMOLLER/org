@@ -70,10 +70,47 @@
     width: 50px;
     height: 50px;
     position: absolute;
-    right: -20px;
-    top: -30px;
 }
 
 .icon:hover {
     cursor: pointer;
+}
+
+.delete {
+    right: -20px;
+    top: -30px;
+}
+
+.like {
+    visibility: hidden;
+    opacity: 0;
+    width: 120px;
+    height: 120px;
+    margin-top: 32px;
+    background-color: #2121212f;
+    border-radius: 100%;
+    transition: all .2s ease-in;
+}
+
+.header_card:hover > .like {
+    visibility: visible;
+    opacity: 1;
+    transition: all .2s ease-in;
+}
+
+.like:focus {
+    visibility: visible;
+    opacity: 1;
+    animation: likeAnimation 1s 1.5s ease-in-out forwards;
+}
+
+@keyframes likeAnimation {
+    0% {
+        visibility: visible;
+        opacity: 1;
+    }
+    100% {
+        visibility: hidden;
+        opacity: 0;
+    }
 }

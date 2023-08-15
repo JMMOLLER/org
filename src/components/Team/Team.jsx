@@ -18,7 +18,7 @@ export default function Team({ dataTeam, helpers, deleteHelper, changeTeamColor,
                     className="section_card_content"
                     style={{ backgroundColor: dataTeam.colors?.background }}
                 >
-                    <input type="color" className="color-picker" value={dataTeam.colors.primary} onChange={handleChangeColor} />
+                    <input type="color" title="Cambiar color del equipo" className="color-picker" value={dataTeam.colors.primary} onChange={handleChangeColor} />
                     <div className="title_section">
                         <h2
                             style={{
