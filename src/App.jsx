@@ -123,6 +123,7 @@ function App() {
           nodeOrgRef={nodeOrgRef}
           setShowModal={setShowModal}
           generateBgColor={generateBgColor}
+          setDataTeams={setDataTeams}
         />
         <OrgTitle
           showForm={showForm}

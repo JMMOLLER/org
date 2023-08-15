@@ -15,6 +15,7 @@ export default function Form(props) {
         setShowModal,
         nodeOrgRef,
         generateBgColor,
+        setDataTeams,
     } = props;
     const [showHelpersForm, setShowHelpersForm] = useState(true);
     const nodeRef = useRef(null);
@@ -38,19 +39,20 @@ export default function Form(props) {
             onEntering={handleEntering}
         >
             <section className="section_form" ref={nodeRef}>
-                    <FormHelpers
-                        teams={teams}
-                        handleRegister={handleRegister}
-                        setShowModal={setShowModal}
-                        nodeRef={nodeRef}
-                        showHelpersForm={showHelpersForm}
-                        setShowHelpersForm={setShowHelpersForm}
-                    />
-                    <FormTeams
-                        generateBgColor={generateBgColor}
-                        showHelpersForm={showHelpersForm}
-                        setShowHelpersForm={setShowHelpersForm}
-                    />
+                <FormHelpers
+                    teams={teams}
+                    handleRegister={handleRegister}
+                    setShowModal={setShowModal}
+                    nodeRef={nodeRef}
+                    showHelpersForm={showHelpersForm}
+                    setShowHelpersForm={setShowHelpersForm}
+                />
+                <FormTeams
+                    generateBgColor={generateBgColor}
+                    showHelpersForm={showHelpersForm}
+                    setShowHelpersForm={setShowHelpersForm}
+                    setDataTeams={setDataTeams}
+                />
             </section>
         </CSSTransition>
     );
@@ -172,11 +174,11 @@ const FormHelpers = (props) => {
     );
 };
 
-const FormTeams = ({ generateBgColor, showHelpersForm, setShowHelpersForm }) => {
+const FormTeams = ({ generateBgColor, showHelpersForm, setShowHelpersForm, setDataTeams }) => {
     const [newTeam, setNewTeam] = useState("");
     const [newTeamColor, setNewTeamColor] = useState("#05c2b5");
     const nodeRef = useRef(null);
-    const dataTeamPreview = {
+    const newDataTeam = {
         teamName: newTeam,
         colors: {
             primary: newTeamColor,
@@ -195,11 +197,8 @@ const FormTeams = ({ generateBgColor, showHelpersForm, setShowHelpersForm }) => 
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        if (e.target.id === "form_team") handleFormTeamSubmit();
-    };
-
-    const handleFormTeamSubmit = () => {
         console.info("submit team:", newTeam, newTeamColor);
+        setDataTeams((prev) => [...prev, newDataTeam]);
     };
 
     const handleEntering = () => {
@@ -249,7 +248,7 @@ const FormTeams = ({ generateBgColor, showHelpersForm, setShowHelpersForm }) => 
                     isRequired={true}
                 />
                 <Team
-                    dataTeam={dataTeamPreview}
+                    dataTeam={newDataTeam}
                     helpers={helperPreview}
                     deleteHelper={() => window.alert("no puedes eliminar una tarjeta de ejemplo")}
                     changeTeamColor={() => window.alert("mejor usa el otro campo de tipo color...")}
@@ -268,6 +267,7 @@ Form.propTypes = {
     setShowModal: PropTypes.func.isRequired,
     nodeOrgRef: PropTypes.object.isRequired,
     generateBgColor: PropTypes.func.isRequired,
+    setDataTeams: PropTypes.func.isRequired,
 };
 
 FormHelpers.propTypes = {
@@ -283,4 +283,5 @@ FormTeams.propTypes = {
     generateBgColor: PropTypes.func.isRequired,
     showHelpersForm: PropTypes.bool.isRequired,
     setShowHelpersForm: PropTypes.func.isRequired,
+    setDataTeams: PropTypes.func.isRequired,
 };
