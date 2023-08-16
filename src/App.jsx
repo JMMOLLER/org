@@ -17,27 +17,57 @@ function App() {
   const nodeOrgRef = useRef(null);
 
   useEffect(() => {
-    const apiUrl = "<your-api-endpoint>";
+    const apiUrl = import.meta.env.VITE_HASURA_GRAPHQL_ENDPOINT;
     const options = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "x-hasura-admin-secret": "<your-admin-secret>"
+        "x-hasura-admin-secret": import.meta.env.VITE_HASURA_ADMIN_SECRET
       }
     }
     const handleFetch = async (url, options) => {
       try {
         const res = await fetch(url, options);
+        if(!res.ok) throw new Error(getStatusText(res.status));
         const data = await res.json();
-        console.log(data);
         return data;
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
-    handleFetch(apiUrl+"getAllTeams", options).then((data) => setDataTeams(data.Teams));
-    handleFetch(apiUrl+"getAllHelpers", options).then((data) => setHelpers(data.Helpers));
-  }, []);
+    handleFetch(apiUrl+"getAllTeams", options)
+      .then((data) => {
+        if(!data) return;
+        setDataTeams(data.Teams)
+      }).catch((error) => 
+        console.error(error)
+      );
+    
+    handleFetch(apiUrl+"getAllHelpers", options)
+      .then((data) => {
+        if(!data) return;
+        setHelpers(data.Helpers)
+      }).catch((error) => 
+        console.error(error)
+      );
+  }, [setDataTeams, setHelpers]);
+
+  function getStatusText(statusCode) {
+    switch (statusCode) {
+      case 400:
+        return 'Bad Request';
+      case 401:
+        return 'Unauthorized';
+      case 403:
+        return 'Forbidden';
+      case 404:
+        return 'Not Found';
+      case 500:
+        return 'Internal Server Error';
+      default:
+        return `Status ${statusCode}`;
+    }
+  }
 
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "";
