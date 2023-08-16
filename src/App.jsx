@@ -19,7 +19,49 @@ function App() {
       position: "Desarrollador FullStack",
       photo: "https://github.com/JMMOLLER.png",
       team: "Front End"
-    }
+    },
+    {
+      id: shortid.generate(),
+      name: "Jorge Moreno",
+      position: "Desarrollador FullStack",
+      photo: "https://i.pinimg.com/736x/b4/d5/69/b4d5695040ebc089e27c21eee7a40d99.jpg",
+      team: "Front End"
+    },
+    {
+      id: shortid.generate(),
+      name: "Jorge Moreno",
+      position: "Desarrollador FullStack",
+      photo: "https://github.com/JMMOLLER.png",
+      team: "Front End"
+    },
+    {
+      id: shortid.generate(),
+      name: "Jorge Moreno",
+      position: "Desarrollador FullStack",
+      photo: "https://i.pinimg.com/736x/b4/d5/69/b4d5695040ebc089e27c21eee7a40d99.jpg",
+      team: "Front End"
+    },
+    {
+      id: shortid.generate(),
+      name: "Jorge Moreno",
+      position: "Desarrollador FullStack",
+      photo: "https://github.com/JMMOLLER.png",
+      team: "Front End"
+    },
+    {
+      id: shortid.generate(),
+      name: "Jorge Moreno",
+      position: "Desarrollador FullStack",
+      photo: "https://i.pinimg.com/736x/b4/d5/69/b4d5695040ebc089e27c21eee7a40d99.jpg",
+      team: "Front End"
+    },
+    {
+      id: shortid.generate(),
+      name: "Jorge Moreno",
+      position: "Desarrollador FullStack",
+      photo: "https://github.com/JMMOLLER.png",
+      team: "Front End"
+    },
   ]);
   const [dataTeams, setDataTeams] = useState([
     {

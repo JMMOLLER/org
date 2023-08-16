@@ -83,9 +83,17 @@ const FormHelpers = (props) => {
             name,
             position,
             photo,
-            team,
+            team: teams.find((t) => t.id === team).teamName,
         };
         handleRegister(data);
+        const teamToFocus = teams.find((t) => t.id === team);
+        const id = setInterval(() => {
+            const el = document.getElementById(teamToFocus.id);
+            if(el){
+                el.scrollIntoView({ behavior: "smooth"});
+                clearInterval(id);
+            }
+        }, 1);
     };
 
     const validateForm = (formData) => {
