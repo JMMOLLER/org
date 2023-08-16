@@ -1,6 +1,8 @@
 button[type="submit"] {
     background-color: #6278f7;
-    width: 10.438rem;
+    min-width: 10.438rem;
+    width:  -moz-fit-content;
+    width: fit-content;
     height: 80px;
     padding: 28px 29px;
     box-sizing: border-box;

@@ -168,7 +168,7 @@ const FormHelpers = (props) => {
                     setValue={setTeam}
                     optionsTeams={teams}
                 />
-                <Button type="submit" text="Crear" />
+                <Button type="submit" text="Añadir Colaborador" />
             </form>
         </CSSTransition>
     );
@@ -254,7 +254,7 @@ const FormTeams = ({ generateBgColor, showHelpersForm, setShowHelpersForm, setDa
                     changeTeamColor={() => window.alert("mejor usa el otro campo de tipo color...")}
                     isPreview={true}
                 />
-                <Button type="submit" text="Crear" />
+                <Button type="submit" text="Crear Equipo" />
             </form>
         </CSSTransition>
     );
