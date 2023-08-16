@@ -6,123 +6,38 @@ import Form from './components/Form'
 import Hero from './components/Hero/Hero'
 import Modal from './components/Modal'
 import Footer from './components/Footer'
-import shortid from 'shortid'
 import './App.css'
 
 function App() {
 
   const [showForm, setShowForm] = useState(true);
-  const [helpers, setHelpers] = useState([
-    {
-      id: shortid.generate(),
-      name: "Jorge Moreno",
-      position: "Desarrollador FullStack",
-      photo: "https://github.com/JMMOLLER.png",
-      team: "Front End"
-    },
-    {
-      id: shortid.generate(),
-      name: "Jorge Moreno",
-      position: "Desarrollador FullStack",
-      photo: "https://i.pinimg.com/736x/b4/d5/69/b4d5695040ebc089e27c21eee7a40d99.jpg",
-      team: "Front End"
-    },
-    {
-      id: shortid.generate(),
-      name: "Jorge Moreno",
-      position: "Desarrollador FullStack",
-      photo: "https://github.com/JMMOLLER.png",
-      team: "Front End"
-    },
-    {
-      id: shortid.generate(),
-      name: "Jorge Moreno",
-      position: "Desarrollador FullStack",
-      photo: "https://i.pinimg.com/736x/b4/d5/69/b4d5695040ebc089e27c21eee7a40d99.jpg",
-      team: "Front End"
-    },
-    {
-      id: shortid.generate(),
-      name: "Jorge Moreno",
-      position: "Desarrollador FullStack",
-      photo: "https://github.com/JMMOLLER.png",
-      team: "Front End"
-    },
-    {
-      id: shortid.generate(),
-      name: "Jorge Moreno",
-      position: "Desarrollador FullStack",
-      photo: "https://i.pinimg.com/736x/b4/d5/69/b4d5695040ebc089e27c21eee7a40d99.jpg",
-      team: "Front End"
-    },
-    {
-      id: shortid.generate(),
-      name: "Jorge Moreno",
-      position: "Desarrollador FullStack",
-      photo: "https://github.com/JMMOLLER.png",
-      team: "Front End"
-    },
-  ]);
-  const [dataTeams, setDataTeams] = useState([
-    {
-      id: shortid.generate(),
-      teamName: "Programación",
-      colors: {
-        primary: "#57c278",
-        background: "#D9F7E9",
-      }
-    },
-    {
-      id: shortid.generate(),
-      teamName: "Front End",
-      colors: {
-        primary: "#82CFFA",
-        background: "#E8F8FF",
-      }
-    },
-    {
-      id: shortid.generate(),
-      teamName: "Data Science",
-      colors: {
-        primary: "#A6D157",
-        background: "#F0F8E2",
-      }
-    },
-    {
-      id: shortid.generate(),
-      teamName: "Devops",
-      colors: {
-        primary: "#E06B69",
-        background: "#F1616526",
-      }
-    },
-    {
-      id: shortid.generate(),
-      teamName: "UX y Diseño",
-      colors: {
-        primary: "#DB6EBF",
-        background: "#DC6EBE26",
-      }
-    },
-    {
-      id: shortid.generate(),
-      teamName: "Móvil",
-      colors: {
-        primary: "#FFBA05",
-        background: "#FFBA0526",
-      }
-    },
-    {
-      id: shortid.generate(),
-      teamName: "Innovación y Gestión",
-      colors: {
-        primary: "#FF8A29",
-        background: "#FF8C2A26",
-      }
-    },
-  ]);
+  const [helpers, setHelpers] = useState([]);
+  const [dataTeams, setDataTeams] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const nodeOrgRef = useRef(null);
+
+  useEffect(() => {
+    const apiUrl = "<your-api-endpoint>";
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-hasura-admin-secret": "<your-admin-secret>"
+      }
+    }
+    const handleFetch = async (url, options) => {
+      try {
+        const res = await fetch(url, options);
+        const data = await res.json();
+        console.log(data);
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    handleFetch(apiUrl+"getAllTeams", options).then((data) => setDataTeams(data.Teams));
+    handleFetch(apiUrl+"getAllHelpers", options).then((data) => setHelpers(data.Helpers));
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "";

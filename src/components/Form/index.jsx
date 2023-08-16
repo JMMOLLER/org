@@ -83,7 +83,9 @@ const FormHelpers = (props) => {
             name,
             position,
             photo,
-            team: teams.find((t) => t.id === team).teamName,
+            team: {
+                teamName: teams.find((t) => t.id === team).teamName
+            },
         };
         handleRegister(data);
         const teamToFocus = teams.find((t) => t.id === team);

@@ -69,7 +69,7 @@ export default function OrgTitle(props) {
                 <Team
                     key={team.teamName}
                     helpers={helpers.filter(
-                        (helper) => helper.team === team.teamName
+                        (helper) => helper.team.teamName === team.teamName
                     )}
                     dataTeam={team}
                     deleteHelper={deleteHelper}
