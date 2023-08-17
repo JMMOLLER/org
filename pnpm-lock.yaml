@@ -9,6 +9,7 @@ specifiers:
   eslint-plugin-react: ^7.32.2
   eslint-plugin-react-hooks: ^4.6.0
   eslint-plugin-react-refresh: ^0.4.3
+  husky: ^8.0.0
   lottie-web: ^5.12.2
   prop-types: ^15.8.1
   react: ^18.2.0
@@ -34,6 +35,7 @@ devDependencies:
   eslint-plugin-react: 7.33.1_eslint@8.46.0
   eslint-plugin-react-hooks: 4.6.0_eslint@8.46.0
   eslint-plugin-react-refresh: 0.4.3_eslint@8.46.0
+  husky: 8.0.3
   vite: 4.4.8
 
 packages:
@@ -1096,6 +1098,12 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: 1.1.1
+    dev: true
+
+  /husky/8.0.3:
+    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /ignore/5.2.4:

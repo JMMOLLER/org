@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Obtener la versión actual del package.json
+CURRENT_VERSION=$(node -p "require('./package.json').version")
+
+# Obtener la fecha actual en el formato "DD/MM/YYYY"
+CURRENT_DATE=$(date +'%d/%m/%Y')
+
+# Añadir o actualizar la llave "lastUpdate" con la fecha actual en el package.json
+node -e "const fs = require('fs'); const packageJson = require('./package.json'); packageJson.lastUpdate = '$CURRENT_DATE'; fs.writeFileSync('./package.json', JSON.stringify(packageJson, null, 2));"
+
+# Incrementar la versión en el package.json utilizando npm version (incremento de parche)
+npx npm version patch --no-git-tag-version
+
+# Obtener la nueva versión después de la actualización
+NEW_VERSION=$(node -p "require('./package.json').version")
+
+# Verificar si la versión ha cambiado
+if [ "$CURRENT_VERSION" = "$NEW_VERSION" ]; then
+  echo "Error: La versión en el package.json debe ser diferente al commit anterior."
+  exit 1
+fi
