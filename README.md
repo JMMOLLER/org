@@ -34,8 +34,8 @@
 
 ## 🤳 Contacto
 
-Si tienes alguna pregunta o simplemente quieres charlar sobre desarrollo web, no dudes en contactarme. Puedes encontrarme en <a href="https://portafolio-jlmm.vercel.app" target="_blank">mi sitio web</a> o en mis redes sociales:
+Si tienes alguna pregunta o simplemente quieres charlar sobre desarrollo web, no dudes en contactarme. Puedes encontrarme en [mi sitio web](https://portafolio-jlmm.vercel.app) o en mis redes sociales:
 
-- LinkedIn: <a href="https://www.linkedin.com/in/jorge-luis-moreno-moller-71207218a" target="_blank">Jorge Moreno</a>
+- LinkedIn: [Jorge Moreno](https://www.linkedin.com/in/jorge-luis-moreno-moller-71207218a)
 
 ¡Espero que disfrutes explorando mi proyecto tanto como yo disfruté desarrollándolo!
