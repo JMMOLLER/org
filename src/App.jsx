@@ -11,63 +11,77 @@ import './App.css'
 function App() {
 
   const [showForm, setShowForm] = useState(true);
-  const [helpers, setHelpers] = useState([]);
-  const [dataTeams, setDataTeams] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const nodeOrgRef = useRef(null);
-
-  useEffect(() => {
-    const apiUrl = import.meta.env.VITE_HASURA_GRAPHQL_ENDPOINT;
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "x-hasura-admin-secret": import.meta.env.VITE_HASURA_ADMIN_SECRET
-      }
+  const [helpers, setHelpers] = useState([
+    {
+      id: "gmKLYqwQbO",
+      name: "Jorge Luis Moreno Moller",
+      position: "Front End Developer",
+      photo: "https://github.com/JMMOLLER.png",
+      team: {
+        teamName: "Front End",
+      },
     }
-    const handleFetch = async (url, options) => {
-      try {
-        const res = await fetch(url, options);
-        if(!res.ok) throw new Error(getStatusText(res.status));
-        const data = await res.json();
-        return data;
-      } catch (error) {
-        console.error(error);
-      }
+  ]);
+  const [dataTeams, setDataTeams] = useState([
+    {
+    id: "uk9R77ykqg",
+    teamName: "Programación",
+    colors:{
+      primary: "#57c278",
+      background: "#D9F7E9"
     }
-    handleFetch(apiUrl+"getAllTeams", options)
-      .then((data) => {
-        if(!data) return;
-        setDataTeams(data.Teams)
-      }).catch((error) => 
-        console.error(error)
-      );
-    
-    handleFetch(apiUrl+"getAllHelpers", options)
-      .then((data) => {
-        if(!data) return;
-        setHelpers(data.Helpers)
-      }).catch((error) => 
-        console.error(error)
-      );
-  }, [setDataTeams, setHelpers]);
-
-  function getStatusText(statusCode) {
-    switch (statusCode) {
-      case 400:
-        return 'Bad Request';
-      case 401:
-        return 'Unauthorized';
-      case 403:
-        return 'Forbidden';
-      case 404:
-        return 'Not Found';
-      case 500:
-        return 'Internal Server Error';
-      default:
-        return `Status ${statusCode}`;
+  },
+  {
+    id: "zODwmLaVX4",
+    teamName: "Front End",
+    colors:{
+      primary: "#82CFFA",
+      background: "#E8F8FF"
+    }
+  },
+  {
+    id: "NsT0Ljtwim",
+    teamName: "Data Science",
+    colors:{
+      primary: "#A6D157",
+      background: "#F0F8E2"
+    }
+  },
+  {
+    id: "V8bgjj7S1N",
+    teamName: "Devops",
+    colors:{
+      primary: "#E06B69",
+      background: "#F1616526"
+    }
+  },
+  {
+    id: "F9x075izvT",
+    teamName: "UX y Diseño",
+    colors:{
+      primary: "#DB6EBF",
+      background: "#DC6EBE26"
+    }
+  },
+  {
+    id: "UqnsATdZz0",
+    teamName: "Móvil",
+    colors:{
+      primary: "#FFBA05",
+      background: "#FFBA0526"
+    }
+  },
+  {
+    id: "JgsoGBBnhP",
+    teamName: "Innovación y Gestión",
+    colors:{
+      primary: "#FF8A29",
+      background: "#FF8C2A26"
     }
   }
+  ]);
+  const [showModal, setShowModal] = useState(false);
+  const nodeOrgRef = useRef(null);
 
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "";

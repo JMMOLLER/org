@@ -6,13 +6,15 @@ import { useEffect, useRef } from "react";
 
 import PropTypes from "prop-types";
 
-export default function Card({ dataHelper, bgColor, deleteHelper }) {
+export default function Card({ dataHelper, bgColor, deleteHelper, isPreview }) {
     const deleteIconRef = useRef(null);
     const likeIconRef = useRef(null);
     const lottieInstanceDelete = useRef(null);
     const lottieInstanceLike = useRef(null);
 
     useEffect(() => {
+        if(isPreview) return;
+
         lottieInstanceDelete.current = lottie.loadAnimation({
             container: deleteIconRef.current,
             renderer: "svg",
@@ -67,23 +69,26 @@ export default function Card({ dataHelper, bgColor, deleteHelper }) {
 
     return (
         <div className="Card">
-            <button
-                type="button"
-                className="icon delete"
-                onClick={handleClick}
-                ref={deleteIconRef}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                title="eliminar colaborador"
-            ></button>
-            <div className="header_card" style={{ backgroundColor: bgColor }}>
+            {!isPreview && (
                 <button
+                    type="button"
+                    className="icon delete"
+                    onClick={handleClick}
+                    ref={deleteIconRef}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    title="eliminar colaborador"
+                ></button>
+            )}
+            <div className="header_card" style={{ backgroundColor: bgColor }}>
+            {!isPreview && (<button
                     type="button"
                     className="icon like"
                     onClick={handleClick}
                     ref={likeIconRef}
                     title="Agregar a me gusta"
                 ></button>
+            )}
                 <img src={dataHelper.photo} alt={"image profile"} />
             </div>
             <div className="content_card">
@@ -98,4 +103,5 @@ Card.propTypes = {
     dataHelper: PropTypes.object.isRequired,
     bgColor: PropTypes.string.isRequired,
     deleteHelper: PropTypes.func.isRequired,
+    isPreview: PropTypes.bool,
 };

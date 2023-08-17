@@ -1,17 +1,22 @@
 import "./Team.css";
 import Card from "../Card/Card";
-import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 import PropTypes from "prop-types";
 
-export default function Team({ dataTeam, helpers, deleteHelper, changeTeamColor, isPreview }) {
+export default function Team({
+    dataTeam,
+    helpers,
+    deleteHelper,
+    changeTeamColor,
+    isPreview,
+}) {
     // const urlImg = "https://avatars.githubusercontent.com/u/86493703?v=4";
     const [parent] = useAutoAnimate();
 
     const handleChangeColor = (e) => {
-        if(isPreview) return changeTeamColor(e.target.value)
         changeTeamColor(dataTeam.id, e.target.value);
-    }
+    };
 
     return (
         <>
@@ -22,7 +27,15 @@ export default function Team({ dataTeam, helpers, deleteHelper, changeTeamColor,
                     ref={parent}
                     id={dataTeam.id}
                 >
-                    <input type="color" title="Cambiar color del equipo" className="color-picker" value={dataTeam.colors.primary} onChange={handleChangeColor} />
+                    {!isPreview && (
+                        <input
+                            type="color"
+                            title="Cambiar color del equipo"
+                            className="color-picker"
+                            value={dataTeam.colors.primary}
+                            onChange={handleChangeColor}
+                        />
+                    )}
                     <div className="title_section">
                         <h2
                             style={{
@@ -38,6 +51,7 @@ export default function Team({ dataTeam, helpers, deleteHelper, changeTeamColor,
                             bgColor={dataTeam.colors?.primary}
                             dataHelper={helper}
                             deleteHelper={deleteHelper}
+                            isPreview={isPreview}
                         />
                     ))}
                 </section>

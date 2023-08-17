@@ -1,10 +1,10 @@
 import "./Form.css";
+import PropTypes from "prop-types";
 import shortid from "shortid";
 import Team from "../Team/Team";
 import Button from "../Button/Button";
 import { InputText, InputSelect } from "../InputComponents";
 import { CSSTransition } from "react-transition-group";
-import PropTypes from "prop-types";
 import { useState, useRef } from "react";
 
 export default function Form(props) {
@@ -189,6 +189,7 @@ const FormTeams = ({ generateBgColor, showHelpersForm, setShowHelpersForm, setDa
     const [newTeamColor, setNewTeamColor] = useState("#05c2b5");
     const nodeRef = useRef(null);
     const newDataTeam = {
+        id: shortid.generate(),
         teamName: newTeam,
         colors: {
             primary: newTeamColor,
@@ -200,7 +201,7 @@ const FormTeams = ({ generateBgColor, showHelpersForm, setShowHelpersForm, setDa
             id: "0",
             name: "Tu Nombre",
             position: "Esta es una tarjeta de ejemplo",
-            photo: "https://img.icons8.com/?size=512&id=108652&format=png",
+            photo: "https://img.icons8.com/?size=256&id=108652&format=svg",
             team: "Front End",
         },
     ]
