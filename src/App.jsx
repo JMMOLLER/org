@@ -1,4 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
+import { CSSTransition } from "react-transition-group";
+import { gql, useQuery } from "@apollo/client";
+import * as fetchGQPL from './Apollo/queryBuilders'
+import Preloader from './components/Preloader/preloader'
 import OrgTitle from './components/Org'
 import Header from './components/Header/Header'
 import Main from './components/Main/Main'
@@ -6,8 +10,6 @@ import Form from './components/Form'
 import Hero from './components/Hero/Hero'
 import Modal from './components/Modal'
 import Footer from './components/Footer'
-import * as fetchGQPL from './Apollo/queryBuilders'
-import { gql, useQuery } from "@apollo/client";
 import LocalDB from './db'
 import './App.css'
 
@@ -19,7 +21,10 @@ function App() {
   const [helpers, setHelpers] = useState([]);
   const [dataTeams, setDataTeams] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [isRendered, setIsRendered] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
   const nodeOrgRef = useRef(null);
+  const preloaderRef = useRef(null);
   const {
     loading: loadingHelpers,
     error: errorHelpers,
@@ -60,7 +65,7 @@ function App() {
   const handleDataFetching = ({loadingState, errorState, dataState, setDataState, dataType}) => {
     if (loadingState) return;
     if (errorState) {
-      alert(`No se pudo cargar los datos de los ${dataType === 'helpers' ? 'colaboradores' : 'equipos'}.`);
+      setShowModal(true);
       console.error(errorState);
       loadFromLocalDB({dataType, setDataState});
       return;
@@ -96,9 +101,40 @@ function App() {
     return color + "26";
   }
 
+  if(!isRendered){
+    return(
+      <CSSTransition
+        in={showPreloader}
+        timeout={1200}
+        classNames="loaded"
+        nodeRef={preloaderRef}
+        unmountOnExit
+        onExited={() => setIsRendered(true)}
+      >
+        <div className="preloader_container" ref={preloaderRef}>
+          {showModal && 
+            Modal({
+              setShowModal,
+              message: "No se pudo cargar los datos de los colaboradores y equipos pero no te preocupes, vamos a usar los datos locales 🙂.",
+              title: "⚠️ ¡Ups!",
+              customClickEvt: () => {setShowPreloader(false)}
+            })
+          }
+          <Preloader
+            errorHelpers={errorHelpers}
+            errorTeams={errorTeams}
+            setShowPreloader={setShowPreloader}
+            loadingHelpers={loadingHelpers}
+            loadingTeams={loadingTeams}
+          />
+        </div>
+      </CSSTransition>
+    )
+  }
+
   return (
     <>
-      {showModal && Modal({ setShowModal })}
+      {showModal && Modal({ setShowModal, isDefault: true })}
       <Header>
         <Hero />
       </Header>

@@ -1,8 +1,11 @@
 {
   "name": "org",
   "private": true,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
+  "description": "Mi Proyecto Web en React y Vite: una muestra de desarrollo moderno con cortocircuitos lógicos, modales intuitivos y más.",
+  "keywords": ["react", "vite", "graphql", "apollo", "lottie", "formkit", "react-transition-group", "shortid"],
+  "author":"JMMOLLER",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

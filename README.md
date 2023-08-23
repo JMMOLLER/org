@@ -6,7 +6,7 @@
 
 - ✅ Utilización del cortocircuito lógico para renderizado condicional eficiente.
 - ✅ Uso de `useEffect` para gestionar efectos secundarios y asegurar una interacción sin problemas.
-- 🔜 Comunicación con el backend: *(pendiente)* (Muy pronto estaré conectando con un backend real para agregar aún más funcionalidades).
+- 🔜 Comunicación con el backend usando una API GraphQL: *(pendiente)* (Muy pronto estaré conectando con un backend real para agregar aún más funcionalidades).
 - ✅ Implementación de modales para proporcionar interacciones contextuales intuitivas.
 - ✅ Agregar y remover equipos con una interfaz fácil de usar.
 - ✅ Actualización de estados en tiempo real para mantener la coherencia de la información.

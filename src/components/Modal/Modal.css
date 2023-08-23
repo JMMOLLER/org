@@ -3,6 +3,8 @@
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     width: 100%;
+    max-width: 50%;
+    min-width: 270px;
     position: fixed;
     z-index: 1;
     height: 100vh;
@@ -34,6 +36,7 @@
     padding: 0 1rem;
     display: flex;
     gap: 8px;
+    color: black;
 }
 
 /* options */
@@ -48,7 +51,7 @@
 .btn_modal {
     all: unset;
     position: relative;
-    color: var(--green-light);
+    color: var(--sky-blue);
     border: none;
     padding: 0.2rem 0.5rem;
     z-index: 2;
@@ -70,26 +73,27 @@
     left: 0;
     border-bottom-color: transparent;
     border-right-color: transparent;
-    border-top-color: var(--green-light);
-    border-left-color: var(--green-light);
+    border-top-color: var(--sky-blue);
+    border-left-color: var(--sky-blue);
 }
 .btn_modal:after {
     bottom: 0;
     right: 0;
     border-top-color: transparent;
     border-left-color: transparent;
-    border-bottom-color: var(--green-light);
-    border-right-color: var(--green-light);
+    border-bottom-color: var(--sky-blue);
+    border-right-color: var(--sky-blue);
 }
 .btn_modal:hover:before,
 .btn_modal:hover:after {
-    border-color: var(--green-light);
+    border-color: var(--sky-blue);
     height: 100%;
     width: 100%;
-    box-shadow: 0 0 5px var(--green-light), 0 0 5px var(--green-light) inset;
+    box-shadow: 0 0 5px var(--sky-blue), 0 0 5px var(--sky-blue) inset;
 }
 .btn_modal:hover {
-    background-color: var(--green-light);
+    background-color: var(--sky-blue);
+    transition: all 0.3s ease;
     transition-delay: 0.3s;
     color: white;
 }

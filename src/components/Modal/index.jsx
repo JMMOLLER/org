@@ -1,30 +1,40 @@
 import "./Modal.css";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-export default function Modal({ setShowModal }) {
+export default function Modal({ setShowModal, message, title, customClickEvt, isDefault }) {
+
+    if (isDefault) {
+        message =
+            "Parece que estás intentando enviar un formulario con datos vacíos, inténtalo otro día...";
+        title = "⚠️ ¡Ups!";
+    }
 
     const handleClick = () => {
         setShowModal(false);
+        if (customClickEvt) {
+            customClickEvt();
+        }
     };
 
     return (
         <div className="modal_container">
             <div className="modal">
                 <div className="title_modal">
-                    <h3>Mala Operación</h3>
+                    <h3>{title}</h3>
                 </div>
                 <hr />
                 <div className="content_modal">
-                    <p className="text">
-                        Parece que estás intentando enviar un formulario con
-                        datos vacíos, inténtalo otro día...
+                    <p className="message">
+                        {message}
                     </p>
-                    <img
-                        src="https://media.tenor.com/KUUtQs-OOHAAAAAM/rana-que-salta-meme-meme-rana.gif"
-                        style={{ width: "50px", height: "50px" }}
-                        alt="mockup image"
-                    />
+                    {isDefault && (
+                        <img
+                            src="https://media.tenor.com/KUUtQs-OOHAAAAAM/rana-que-salta-meme-meme-rana.gif"
+                            style={{ width: "50px", height: "50px" }}
+                            alt="mockup image"
+                        />
+                    )}
                 </div>
                 <hr />
                 <div className="options_modal">
@@ -43,5 +53,8 @@ export default function Modal({ setShowModal }) {
 
 Modal.propTypes = {
     setShowModal: PropTypes.func.isRequired,
-    rootHeight: PropTypes.number.isRequired
+    title: PropTypes.string,
+    message: PropTypes.string,
+    customClickEvt: PropTypes.func,
+    isDefault: PropTypes.bool,
 };
