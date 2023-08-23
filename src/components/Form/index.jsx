@@ -201,7 +201,7 @@ const FormTeams = ({ generateBgColor, showHelpersForm, setShowHelpersForm, setDa
             id: "0",
             name: "Tu Nombre",
             position: "Esta es una tarjeta de ejemplo",
-            photo: "https://img.icons8.com/?size=256&id=108652&format=svg",
+            photo: "https://img.icons8.com/?size=256&id=108652&format=png",
             team: "Front End",
         },
     ]

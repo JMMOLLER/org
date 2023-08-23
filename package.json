@@ -1,7 +1,7 @@
 {
   "name": "org",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,9 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.1",
     "@formkit/auto-animate": "^0.7.0",
+    "graphql": "^16.8.0",
     "lottie-web": "^5.12.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -27,8 +29,8 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "vite": "^4.4.5",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "vite": "^4.4.5"
   },
-  "lastUpdate": "16/08/2023"
+  "lastUpdate": "22/08/2023"
 }

@@ -39,3 +39,7 @@ Si tienes alguna pregunta o simplemente quieres charlar sobre desarrollo web, no
 - LinkedIn: [Jorge Moreno](https://www.linkedin.com/in/jorge-luis-moreno-moller-71207218a)
 
 ¡Espero que disfrutes explorando mi proyecto tanto como yo disfruté desarrollándolo!
+
+## Nota
+Estas son las variables de entorno:
+- ```VITE_API_GRAPHQL_URL=```

@@ -6,86 +6,73 @@ import Form from './components/Form'
 import Hero from './components/Hero/Hero'
 import Modal from './components/Modal'
 import Footer from './components/Footer'
+import * as fetchGQPL from './Apollo/queryBuilders'
+import { gql, useQuery } from "@apollo/client";
+import LocalDB from './db'
 import './App.css'
 
 function App() {
 
+  const QUERY_HELPERS = gql`${fetchGQPL.buildQueryAllHelpers}`;
+  const QUERY_TEAMS = gql`${fetchGQPL.buildQueryAllTeams}`;
   const [showForm, setShowForm] = useState(true);
-  const [helpers, setHelpers] = useState([
-    {
-      id: "gmKLYqwQbO",
-      name: "Jorge Luis Moreno Moller",
-      position: "Front End Developer",
-      photo: "https://github.com/JMMOLLER.png",
-      team: {
-        teamName: "Front End",
-      },
-    }
-  ]);
-  const [dataTeams, setDataTeams] = useState([
-    {
-    id: "uk9R77ykqg",
-    teamName: "Programación",
-    colors:{
-      primary: "#57c278",
-      background: "#D9F7E9"
-    }
-  },
-  {
-    id: "zODwmLaVX4",
-    teamName: "Front End",
-    colors:{
-      primary: "#82CFFA",
-      background: "#E8F8FF"
-    }
-  },
-  {
-    id: "NsT0Ljtwim",
-    teamName: "Data Science",
-    colors:{
-      primary: "#A6D157",
-      background: "#F0F8E2"
-    }
-  },
-  {
-    id: "V8bgjj7S1N",
-    teamName: "Devops",
-    colors:{
-      primary: "#E06B69",
-      background: "#F1616526"
-    }
-  },
-  {
-    id: "F9x075izvT",
-    teamName: "UX y Diseño",
-    colors:{
-      primary: "#DB6EBF",
-      background: "#DC6EBE26"
-    }
-  },
-  {
-    id: "UqnsATdZz0",
-    teamName: "Móvil",
-    colors:{
-      primary: "#FFBA05",
-      background: "#FFBA0526"
-    }
-  },
-  {
-    id: "JgsoGBBnhP",
-    teamName: "Innovación y Gestión",
-    colors:{
-      primary: "#FF8A29",
-      background: "#FF8C2A26"
-    }
-  }
-  ]);
+  const [helpers, setHelpers] = useState([]);
+  const [dataTeams, setDataTeams] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const nodeOrgRef = useRef(null);
+  const {
+    loading: loadingHelpers,
+    error: errorHelpers,
+    data: dataHelpers
+  } = useQuery(QUERY_HELPERS);
+  const {
+    loading: loadingTeams,
+    error: errorTeams,
+    data: dataTeamsGQL
+  } = useQuery(QUERY_TEAMS);
 
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "";
   }, [showModal]);
+
+  useEffect(() => {
+    handleDataFetching({
+      loadingState: loadingHelpers,
+      errorState: errorHelpers,
+      dataState: dataHelpers,
+      setDataState: setHelpers,
+      dataType: "helpers"
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadingHelpers, errorHelpers, dataHelpers]);
+  
+  useEffect(() => {
+    handleDataFetching({
+      loadingState: loadingTeams,
+      errorState: errorTeams,
+      dataState: dataTeamsGQL,
+      setDataState: setDataTeams,
+      dataType: "teams"
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadingTeams, errorTeams, dataTeamsGQL]);
+
+  const handleDataFetching = ({loadingState, errorState, dataState, setDataState, dataType}) => {
+    if (loadingState) return;
+    if (errorState) {
+      alert(`No se pudo cargar los datos de los ${dataType === 'helpers' ? 'colaboradores' : 'equipos'}.`);
+      console.error(errorState);
+      loadFromLocalDB({dataType, setDataState});
+      return;
+    }
+    if (dataState) {
+      setDataState(dataState[dataType] || []);
+    }
+  };
+
+  const loadFromLocalDB = ({dataType, setDataState}) => {
+    setDataState(LocalDB[dataType]);
+  };
 
   const handleRegister = (data) => {
     setHelpers([...helpers, data]);
@@ -140,7 +127,5 @@ function App() {
     </>
   )
 }
-
-
 
 export default App
