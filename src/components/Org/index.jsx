@@ -27,7 +27,7 @@ export default function OrgTitle(props) {
         const isInit = nodeOrgRef.current.classList.contains("init");
     
         if (isInit) {
-            nodeOrgRef.current.classList.remove("init");
+            return nodeOrgRef.current.classList.remove("init");
         }
     
         if (showForm && !isInit) {
