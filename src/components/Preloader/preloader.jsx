@@ -52,8 +52,8 @@ function Preloader({ errorHelpers, errorTeams, setShowPreloader, loadingHelpers,
 }
 
 Preloader.propTypes = {
-    errorHelpers: propTypes.bool,
-    errorTeams: propTypes.bool,
+    errorHelpers: propTypes.object,
+    errorTeams: propTypes.object,
     setShowPreloader: propTypes.func.isRequired,
     loadingHelpers: propTypes.bool.isRequired,
     loadingTeams: propTypes.bool.isRequired,
