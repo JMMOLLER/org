@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { CSSTransition } from "react-transition-group";
-import { gql, useQuery, useSubscription } from "@apollo/client";
+import { gql, useQuery, useSubscription, useMutation } from "@apollo/client";
 import * as fetchGQPL from './Apollo/queryBuilders'
 import Preloader from './components/Preloader/preloader'
 import OrgTitle from './components/Org'
@@ -33,6 +33,14 @@ function App() {
       }
     ]
   })}`;
+  const ADD_HELPER = gql`${fetchGQPL.buildQuery({
+    typeQuery: "mutation",
+    operationName: "Mutation($input: HelperInput)",
+    query: "createHelper(input: $input)",
+    queryFields: [
+      "id",
+    ]
+  })}`;
 
   const [showForm, setShowForm] = useState(true);
   const [helpers, setHelpers] = useState([]);
@@ -53,6 +61,15 @@ function App() {
     error: errorTeams,
     data: dataTeamsGQL
   } = useQuery(QUERY_TEAMS);
+  const [
+    addHelper,
+    {
+      data: dataMutation,
+      loading: loadingMutation,
+      error: errorMutation
+    }
+  ] = useMutation(ADD_HELPER);
+
 
   const { data, loading, error } = useSubscription(SUBSCRIPTION_HELPERS);
 
@@ -63,7 +80,6 @@ function App() {
       setIsLive(false);
       return;
     }
-    console.log("newData", data);
     setHelpers([...helpers, data.newHelper]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, loading]);
@@ -71,6 +87,14 @@ function App() {
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "";
   }, [showModal]);
+
+  useEffect(() => {
+    if(loadingMutation) return;
+    if(errorMutation){
+      console.error(errorMutation);
+      return;
+    }
+  }, [dataMutation, loadingMutation, errorMutation]);
 
   useEffect(() => {
     handleDataFetching({
@@ -113,8 +137,14 @@ function App() {
   };
 
   const handleRegister = (data) => {
-    // Add mutation send data to server
-    setHelpers([...helpers, data]);
+    if(isLive){
+      addHelper({ variables: { input: data } });
+    } else {
+      data.team = {
+        teamName: dataTeams.find((team) => team.id === data.teamRef)?.teamName
+      };
+      setHelpers([...helpers, data]);
+    }
   }
 
   const deleteHelper = (helperId) => {

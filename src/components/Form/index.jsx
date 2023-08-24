@@ -76,16 +76,15 @@ const FormHelpers = (props) => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        if (!validateForm({ name, position, photo, team }))
+        if (!validateForm({ name, position, photo, team })){
             return handleFormError();
+        }
         const data = {
             id: shortid.generate(),
             name,
             position,
             photo,
-            team: {
-                teamName: teams.find((t) => t.id === team).teamName
-            },
+            teamRef: team,
         };
         handleRegister(data);
         const teamToFocus = teams.find((t) => t.id === team);

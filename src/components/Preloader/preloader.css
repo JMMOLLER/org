@@ -17,6 +17,8 @@
     font-family: 'Montserrat';
     color: white;
     font-size: 2rem;
+    text-align: center;
+    margin: 0 10px;
 }
 
 .text.blink_animation {
@@ -51,5 +53,11 @@
     }
     100% {
         transform: scale(0);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .text {
+        font-size: 1.3rem;
     }
 }
