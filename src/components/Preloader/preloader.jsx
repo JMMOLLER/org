@@ -4,11 +4,16 @@ import lottie from "lottie-web";
 import propTypes from "prop-types";
 import "./preloader.css";
 
-function Preloader({ errorHelpers, errorTeams, setShowPreloader, loadingHelpers, loadingTeams }){
-
+function Preloader({
+    errorHelpers,
+    errorTeams,
+    setShowPreloader,
+    loadingHelpers,
+    loadingTeams,
+}) {
     const preloaderRef = useRef(null);
-    const [text, setText] = useState("Loading");
-
+    const textRef = useRef(null);
+    const [text, setText] = useState("Cargando");
 
     useEffect(() => {
         if (loadingHelpers && loadingTeams) return;
@@ -16,7 +21,13 @@ function Preloader({ errorHelpers, errorTeams, setShowPreloader, loadingHelpers,
             if (errorHelpers || errorTeams) return;
             setShowPreloader(false);
         }
-    }, [errorHelpers, errorTeams, loadingHelpers, loadingTeams, setShowPreloader]);
+    }, [
+        errorHelpers,
+        errorTeams,
+        loadingHelpers,
+        loadingTeams,
+        setShowPreloader,
+    ]);
 
     useEffect(() => {
         lottie.loadAnimation({
@@ -27,28 +38,57 @@ function Preloader({ errorHelpers, errorTeams, setShowPreloader, loadingHelpers,
             animationData: preloaderAnimation,
         });
 
-        const id = setInterval(() => {
+        const intervalId_1 = setInterval(() => {
             setText((text) => {
-                if(text.length === 10){
-                    return "Loading";
-                }else{
-                    return text + ".";
-                }
+                return text + ".";
             });
         }, 400);
-        
+
+        let count = 0, isFirstChange = true;
+
+        const intervalId_2 = setInterval(() => {
+            setText((text) => {
+                const index = text.endsWith("...");
+                if (index) {
+                    count++;
+                    if(count >= 7) {
+                        if(isFirstChange) {
+                            handleAnimationText();
+                            isFirstChange = false;
+                        }
+                        if(count >= 15) {
+                            count = -10;
+                            handleAnimationText();
+                            isFirstChange = true;
+                        }
+                        return "Está tardando un poco más de lo esperado";
+                    }
+                    return "Cargando";
+                }else {
+                    return text;
+                }
+            });
+        }, 2000);
+
+        const handleAnimationText = () => {
+            if(!textRef.current.classList.contains("blink_animation")){
+                textRef.current.classList.add("blink_animation");
+            }
+        }
+
         return () => {
             lottie.destroy();
-            clearInterval(id);
-        }
+            clearInterval(intervalId_1);
+            clearInterval(intervalId_2);
+        };
     }, []);
 
-    return(
+    return (
         <>
             <div className="preloader" ref={preloaderRef}></div>
-            <p className="text">{text}</p>
+            <p className="text" onAnimationEnd={(e) => {textRef.current.classList.remove(e.animationName+"_animation")}} ref={textRef}>{text}</p>
         </>
-    )
+    );
 }
 
 Preloader.propTypes = {
