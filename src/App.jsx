@@ -11,28 +11,14 @@ import Hero from './components/Hero/Hero'
 import Modal, { ModalLive } from './components/Modal'
 import Footer from './components/Footer'
 import LocalDB from './db'
+import propTypes from 'prop-types'
 import './App.css'
 
-function App() {
+function App({ isOnline }) {
 
   const QUERY_HELPERS = gql`${fetchGQPL.buildQueryAllHelpers}`;
   const QUERY_TEAMS = gql`${fetchGQPL.buildQueryAllTeams}`;
-  const SUBSCRIPTION_HELPERS = gql`${fetchGQPL.buildQuery({
-    typeQuery: "subscription",
-    operationName: "Subscription",
-    query: "newHelper",
-    queryFields: [
-      "id",
-      "name",
-      "position",
-      "photo",
-      {
-        team: [
-          "teamName"
-        ]
-      }
-    ]
-  })}`;
+  const SUBSCRIPTION_HELPERS = gql`${fetchGQPL.buildSubscriptionHelper}`;
   const ADD_HELPER = gql`${fetchGQPL.buildQuery({
     typeQuery: "mutation",
     operationName: "Mutation($input: HelperInput)",
@@ -48,7 +34,6 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [isRendered, setIsRendered] = useState(false);
   const [showPreloader, setShowPreloader] = useState(true);
-  const [isLive, setIsLive] = useState(true);
   const nodeOrgRef = useRef(null);
   const preloaderRef = useRef(null);
   const {
@@ -77,7 +62,6 @@ function App() {
     if (loading) return;
     if (error) {
       console.error(error);
-      setIsLive(false);
       return;
     }
     setHelpers([...helpers, data.newHelper]);
@@ -122,7 +106,6 @@ function App() {
     if (loadingState) return;
     if (errorState) {
       setShowModal(true);
-      setIsLive(false);
       console.error(errorState);
       loadFromLocalDB({dataType, setDataState});
       return;
@@ -137,7 +120,7 @@ function App() {
   };
 
   const handleRegister = (data) => {
-    if(isLive){
+    if(isOnline){
       addHelper({ variables: { input: data } });
     } else {
       data.team = {
@@ -199,7 +182,7 @@ function App() {
   return (
     <>
       {showModal && Modal({ setShowModal, isDefault: true })}
-      <ModalLive isLive={isLive} />
+      <ModalLive isLive={isOnline} />
       <Header>
         <Hero />
       </Header>
@@ -227,6 +210,10 @@ function App() {
       <Footer />
     </>
   )
+}
+
+App.propTypes = {
+  isOnline: propTypes.bool.isRequired
 }
 
 export default App

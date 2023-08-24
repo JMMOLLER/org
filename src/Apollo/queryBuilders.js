@@ -38,7 +38,22 @@ const buildQueryAllTeams = buildQuery({
         "teamName",
         {
             colors: ["primary", "background"],
-        }
+        },
+    ],
+});
+
+const buildSubscriptionHelper = buildQuery({
+    typeQuery: "subscription",
+    operationName: "Subscription",
+    query: "newHelper",
+    queryFields: [
+        "id",
+        "name",
+        "position",
+        "photo",
+        {
+            team: ["teamName"],
+        },
     ],
 });
 
@@ -72,4 +87,5 @@ export {
     buildQueryAllHelpers,
     buildQueryAllTeams,
     buildQuery,
+    buildSubscriptionHelper,
 };
