@@ -11,6 +11,37 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
+.modal_container.live {
+    all: unset;
+    background-color: #b7b7b7ba;
+    padding: .2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    z-index: 1;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.modal_container.live > .live_animation {
+    width: 30px;
+    height: 30px;
+}
+.modal_container.live > .live_animation.error {
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    background-color: #ff0000;
+    border-radius: 100%;
+}
+.modal_container.live > .text {
+    margin-right: 5px;
+    font-size: 1.2rem;
+}
+
 .modal {
     position: relative;
     width: calc(100% - 2rem);

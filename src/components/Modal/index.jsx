@@ -1,6 +1,36 @@
 import "./Modal.css";
-
+import { useRef, useEffect } from "react";
+import lottie from "lottie-web";
+import liveAnimation from "../../assets/lottie/live-animation.json";
 import PropTypes from "prop-types";
+
+export function ModalLive({ isLive }){
+    const animationElement = useRef(null);
+
+    useEffect(() => {
+
+        lottie.loadAnimation({
+            container: animationElement.current,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            animationData: liveAnimation,
+        });
+
+        if (!isLive) lottie.destroy();
+
+        return () => {
+            lottie.destroy();
+        };
+    }, [isLive]);
+
+    return (
+        <div className="modal_container live" title="Escuchando al servidor por nuevos colaboradores">
+            <div className={isLive ? "live_animation" : "live_animation error"} ref={animationElement}></div>
+            <p className="text">{isLive ? "En Vivo" : "Desconectado"}</p>
+        </div>
+    );
+}
 
 export default function Modal({ setShowModal, message, title, customClickEvt, isDefault }) {
 
@@ -58,3 +88,7 @@ Modal.propTypes = {
     customClickEvt: PropTypes.func,
     isDefault: PropTypes.bool,
 };
+
+ModalLive.propTypes = {
+    isLive: PropTypes.bool.isRequired,
+}

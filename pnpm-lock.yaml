@@ -11,6 +11,7 @@ specifiers:
   eslint-plugin-react-hooks: ^4.6.0
   eslint-plugin-react-refresh: ^0.4.3
   graphql: ^16.8.0
+  graphql-ws: ^5.14.0
   husky: ^8.0.0
   lottie-web: ^5.12.2
   prop-types: ^15.8.1
@@ -21,9 +22,10 @@ specifiers:
   vite: ^4.4.5
 
 dependencies:
-  '@apollo/client': 3.8.1_cf3vfyi7pszohrk4iyysntvyhy
+  '@apollo/client': 3.8.1_v6cnvjv23ywqzqougsj3mw2toq
   '@formkit/auto-animate': 0.7.0
   graphql: 16.8.0
+  graphql-ws: 5.14.0_graphql@16.8.0
   lottie-web: 5.12.2
   prop-types: 15.8.1
   react: 18.2.0
@@ -49,7 +51,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /@apollo/client/3.8.1_cf3vfyi7pszohrk4iyysntvyhy:
+  /@apollo/client/3.8.1_v6cnvjv23ywqzqougsj3mw2toq:
     resolution: {integrity: sha512-JGGj/9bdoLEqzatRikDeN8etseY5qeFAY0vSAx/Pd0ePNsaflKzHx6V2NZ0NsGkInq+9IXXX3RLVDf0EotizMA==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
@@ -73,6 +75,7 @@ packages:
       '@wry/trie': 0.4.3
       graphql: 16.8.0
       graphql-tag: 2.12.6_graphql@16.8.0
+      graphql-ws: 5.14.0_graphql@16.8.0
       hoist-non-react-statics: 3.3.2
       optimism: 0.17.5
       prop-types: 15.8.1
@@ -1138,6 +1141,15 @@ packages:
     dependencies:
       graphql: 16.8.0
       tslib: 2.6.2
+    dev: false
+
+  /graphql-ws/5.14.0_graphql@16.8.0:
+    resolution: {integrity: sha512-itrUTQZP/TgswR4GSSYuwWUzrE/w5GhbwM2GX3ic2U7aw33jgEsayfIlvaj7/GcIvZgNMzsPTrE5hqPuFUiE5g==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      graphql: '>=0.11 <=16'
+    dependencies:
+      graphql: 16.8.0
     dev: false
 
   /graphql/16.8.0:

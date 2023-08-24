@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { CSSTransition } from "react-transition-group";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useSubscription } from "@apollo/client";
 import * as fetchGQPL from './Apollo/queryBuilders'
 import Preloader from './components/Preloader/preloader'
 import OrgTitle from './components/Org'
@@ -8,7 +8,7 @@ import Header from './components/Header/Header'
 import Main from './components/Main/Main'
 import Form from './components/Form'
 import Hero from './components/Hero/Hero'
-import Modal from './components/Modal'
+import Modal, { ModalLive } from './components/Modal'
 import Footer from './components/Footer'
 import LocalDB from './db'
 import './App.css'
@@ -17,12 +17,30 @@ function App() {
 
   const QUERY_HELPERS = gql`${fetchGQPL.buildQueryAllHelpers}`;
   const QUERY_TEAMS = gql`${fetchGQPL.buildQueryAllTeams}`;
+  const SUBSCRIPTION_HELPERS = gql`${fetchGQPL.buildQuery({
+    typeQuery: "subscription",
+    operationName: "Subscription",
+    query: "newHelper",
+    queryFields: [
+      "id",
+      "name",
+      "position",
+      "photo",
+      {
+        team: [
+          "teamName"
+        ]
+      }
+    ]
+  })}`;
+
   const [showForm, setShowForm] = useState(true);
   const [helpers, setHelpers] = useState([]);
   const [dataTeams, setDataTeams] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [isRendered, setIsRendered] = useState(false);
   const [showPreloader, setShowPreloader] = useState(true);
+  const [isLive, setIsLive] = useState(true);
   const nodeOrgRef = useRef(null);
   const preloaderRef = useRef(null);
   const {
@@ -35,6 +53,20 @@ function App() {
     error: errorTeams,
     data: dataTeamsGQL
   } = useQuery(QUERY_TEAMS);
+
+  const { data, loading, error } = useSubscription(SUBSCRIPTION_HELPERS);
+
+  useEffect(() => {
+    if (loading) return;
+    if (error) {
+      console.error(error);
+      setIsLive(false);
+      return;
+    }
+    console.log("newData", data);
+    setHelpers([...helpers, data.newHelper]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, loading]);
 
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "";
@@ -66,6 +98,7 @@ function App() {
     if (loadingState) return;
     if (errorState) {
       setShowModal(true);
+      setIsLive(false);
       console.error(errorState);
       loadFromLocalDB({dataType, setDataState});
       return;
@@ -80,6 +113,7 @@ function App() {
   };
 
   const handleRegister = (data) => {
+    // Add mutation send data to server
     setHelpers([...helpers, data]);
   }
 
@@ -135,6 +169,7 @@ function App() {
   return (
     <>
       {showModal && Modal({ setShowModal, isDefault: true })}
+      <ModalLive isLive={isLive} />
       <Header>
         <Hero />
       </Header>

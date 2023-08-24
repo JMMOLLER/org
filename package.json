@@ -1,7 +1,7 @@
 {
   "name": "org",
   "private": true,
-  "version": "1.0.7",
+  "version": "1.0.8",
   "type": "module",
   "description": "Mi Proyecto Web en React y Vite: una muestra de desarrollo moderno con cortocircuitos lógicos, modales intuitivos y más.",
   "keywords": [
@@ -26,6 +26,7 @@
     "@apollo/client": "^3.8.1",
     "@formkit/auto-animate": "^0.7.0",
     "graphql": "^16.8.0",
+    "graphql-ws": "^5.14.0",
     "lottie-web": "^5.12.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
