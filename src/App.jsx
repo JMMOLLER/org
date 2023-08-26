@@ -31,7 +31,7 @@ function App({ isOnline }) {
   const [showForm, setShowForm] = useState(true);
   const [helpers, setHelpers] = useState([]);
   const [dataTeams, setDataTeams] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState({ show: false, payload: {}});
   const [isRendered, setIsRendered] = useState(false);
   const [showPreloader, setShowPreloader] = useState(true);
   const nodeOrgRef = useRef(null);
@@ -105,7 +105,14 @@ function App({ isOnline }) {
   const handleDataFetching = ({loadingState, errorState, dataState, setDataState, dataType}) => {
     if (loadingState) return;
     if (errorState) {
-      setShowModal(true);
+      setShowModal({
+        show: true,
+        payload: {
+          message: "No se pudo cargar los datos de los colaboradores y equipos pero no te preocupes, vamos a usar los datos locales 🙂.",
+          title: "⚠️ ¡Ups!",
+          customClickEvt: () => {setShowPreloader(false)}
+        }
+      });
       console.error(errorState);
       loadFromLocalDB({dataType, setDataState});
       return;
@@ -159,12 +166,10 @@ function App({ isOnline }) {
         onExited={() => setIsRendered(true)}
       >
         <div className="preloader_container" ref={preloaderRef}>
-          {showModal && 
+          {showModal.show && 
             Modal({
               setShowModal,
-              message: "No se pudo cargar los datos de los colaboradores y equipos pero no te preocupes, vamos a usar los datos locales 🙂.",
-              title: "⚠️ ¡Ups!",
-              customClickEvt: () => {setShowPreloader(false)}
+              payload: showModal.payload
             })
           }
           <Preloader
@@ -181,7 +186,7 @@ function App({ isOnline }) {
 
   return (
     <>
-      {showModal && Modal({ setShowModal, isDefault: true })}
+      {showModal.show && Modal({ setShowModal, payload: showModal.payload, easterEgg: showModal.easterEgg })}
       <ModalLive isLive={isOnline} />
       <ModalSchemeColor initialState={new Date().getHours() >= 18 || new Date().getHours() <= 6} />
       <Header>

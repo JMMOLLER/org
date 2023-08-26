@@ -23,7 +23,10 @@ export default function Team({
             {helpers.length > 0 && (
                 <section
                     className="section_card_content"
-                    style={{ backgroundColor: dataTeam.colors?.background }}
+                    style={{
+                        backgroundColor: dataTeam.colors?.background,
+                        color: isPreview === true ? "var(--text-color)": undefined,
+                    }}
                     ref={parent}
                     id={dataTeam.id}
                 >

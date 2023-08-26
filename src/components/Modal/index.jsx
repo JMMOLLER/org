@@ -114,18 +114,8 @@ export function ModalLive({ isLive }) {
     );
 }
 
-export default function Modal({
-    setShowModal,
-    message,
-    title,
-    customClickEvt,
-    isDefault,
-}) {
-    if (isDefault) {
-        message =
-            "Parece que estás intentando enviar un formulario con datos vacíos, inténtalo otro día...";
-        title = "⚠️ ¡Ups!";
-    }
+export default function Modal({ setShowModal, payload, easterEgg }) {
+    let { message, title, customClickEvt } = payload;
 
     const handleClick = () => {
         setShowModal(false);
@@ -143,7 +133,7 @@ export default function Modal({
                 <hr />
                 <div className="content_modal">
                     <p className="message">{message}</p>
-                    {isDefault && (
+                    {easterEgg && (
                         <img
                             src="https://media.tenor.com/KUUtQs-OOHAAAAAM/rana-que-salta-meme-meme-rana.gif"
                             style={{ width: "50px", height: "50px" }}
@@ -168,10 +158,8 @@ export default function Modal({
 
 Modal.propTypes = {
     setShowModal: PropTypes.func.isRequired,
-    title: PropTypes.string,
-    message: PropTypes.string,
-    customClickEvt: PropTypes.func,
-    isDefault: PropTypes.bool,
+    payload: PropTypes.object.isRequired,
+    easterEgg: PropTypes.bool,
 };
 
 ModalLive.propTypes = {

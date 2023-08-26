@@ -6,6 +6,7 @@ import Button from "../Button/Button";
 import { InputText, InputSelect } from "../Input";
 import { CSSTransition } from "react-transition-group";
 import { useState, useRef } from "react";
+import { useReducer } from "react";
 
 export default function Form(props) {
     const {
@@ -52,6 +53,7 @@ export default function Form(props) {
                     showHelpersForm={showHelpersForm}
                     setShowHelpersForm={setShowHelpersForm}
                     setDataTeams={setDataTeams}
+                    setShowModal={setShowModal}
                 />
             </section>
         </CSSTransition>
@@ -108,7 +110,15 @@ const FormHelpers = (props) => {
     const handleFormError = () => {
         const el = nodeRefSection.current;
         el.scrollIntoView({ behavior: "smooth" });
-        setShowModal(true);
+        setShowModal({
+            show: true,
+            payload: {
+                message:
+            "Parece que estás intentando enviar un formulario con datos vacíos, inténtalo otro día...",
+                title: "⚠️ ¡Vaya, vaya..!",
+            },
+            easterEgg: true
+        });
     };
 
 
@@ -183,7 +193,7 @@ const FormHelpers = (props) => {
     );
 };
 
-const FormTeams = ({ generateBgColor, showHelpersForm, setShowHelpersForm, setDataTeams }) => {
+const FormTeams = ({ generateBgColor, showHelpersForm, setShowHelpersForm, setDataTeams, setShowModal }) => {
     const [newTeam, setNewTeam] = useState("");
     const [newTeamColor, setNewTeamColor] = useState("#05c2b5");
     const nodeRef = useRef(null);
@@ -207,9 +217,21 @@ const FormTeams = ({ generateBgColor, showHelpersForm, setShowHelpersForm, setDa
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.info("submit team:", newTeam, newTeamColor);
+        setShowModal({
+            show: true,
+            payload: {
+                title: "✅ ¡Equipo creado!",
+                message: "Ahora puedes añadir colaboradores a tu nuevo equipo.",
+            }
+        });
         setDataTeams((prev) => [...prev, newDataTeam]);
+        handleCleanForm();
     };
+
+    const handleCleanForm = () => {
+        setNewTeam("");
+        setNewTeamColor("#05c2b5");
+    }
 
     const handleEntering = () => {
         nodeRef.current.style.display = "none";
@@ -294,4 +316,5 @@ FormTeams.propTypes = {
     showHelpersForm: PropTypes.bool.isRequired,
     setShowHelpersForm: PropTypes.func.isRequired,
     setDataTeams: PropTypes.func.isRequired,
+    setShowModal: PropTypes.func.isRequired,
 };
