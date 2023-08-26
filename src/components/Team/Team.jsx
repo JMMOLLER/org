@@ -24,8 +24,7 @@ export default function Team({
                 <section
                     className="section_card_content"
                     style={{
-                        backgroundColor: dataTeam.colors?.background,
-                        color: isPreview === true ? "var(--text-color)": undefined,
+                        backgroundColor: dataTeam.colors?.background
                     }}
                     ref={parent}
                     id={dataTeam.id}
