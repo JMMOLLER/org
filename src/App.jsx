@@ -69,7 +69,7 @@ function App({ isOnline }) {
   }, [data, loading]);
 
   useEffect(() => {
-    document.body.style.overflow = showModal ? "hidden" : "";
+    document.body.style.overflow = showModal.show ? "hidden" : "";
   }, [showModal]);
 
   useEffect(() => {
