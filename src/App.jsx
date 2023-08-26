@@ -118,8 +118,21 @@ function App({ isOnline }) {
       return;
     }
     if (dataState) {
-      setDataState(dataState[dataType] || []);
+      if(dataType === "teams"){
+        const mutableTeam = handleMutation({dataState, dataType});
+        setDataState(mutableTeam || []);
+      } else {
+        setDataState(dataState[dataType] || []);
+      }
     }
+  };
+
+  const handleMutation = ({dataState, dataType}) => {
+    return dataState[dataType].map((team) => {
+      const mutableTeam = {...team};
+      mutableTeam.colors = {...team.colors};
+      return mutableTeam;
+    });
   };
 
   const loadFromLocalDB = ({dataType, setDataState}) => {
@@ -144,6 +157,7 @@ function App({ isOnline }) {
   const changeTeamColor = (teamId, color) => {
     setDataTeams(dataTeams.map((item) => {
       if (item.id === teamId) {
+        console.log(item.colors, color);
         item.colors.primary = color;
         item.colors.background = generateBgColor(color);
       }

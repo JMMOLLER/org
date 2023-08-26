@@ -2,7 +2,7 @@ import "./Input.css";
 import { useState } from "react";
 import propTypes from "prop-types";
 
-export function InputText(props /*: props*/) {
+export function InputText(props) {
     const handleChnage = (e) => {
         props.setValue(e.target.value);
     };
