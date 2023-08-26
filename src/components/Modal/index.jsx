@@ -1,14 +1,90 @@
 import "./Modal.css";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import lottie from "lottie-web";
 import liveAnimation from "../../assets/lottie/live-animation.json";
+import schemeColorAnimation from "../../assets/lottie/dark_light-animation.json";
 import PropTypes from "prop-types";
 
-export function ModalLive({ isLive }){
+export function ModalSchemeColor() {
+    const animationElement = useRef(null);
+    const [isDark, setIsDark] = useState(false);
+    let [animation, setAnimation] = useState(null);
+
+    useEffect(() => {
+        if (animation) return;
+        setAnimation(
+            lottie.loadAnimation({
+                container: animationElement.current,
+                renderer: "svg",
+                loop: false,
+                autoplay: false,
+                animationData: schemeColorAnimation,
+                rendererSettings: {
+                    className: "lottie_scheme_color",
+                    viewBoxSize: "0 0 110 110",
+                },
+            })
+        );
+    }, [animation]);
+
+    useEffect(() => {
+        if (!animation) return;
+        if (isDark) {
+            animation.setDirection(1);
+            animation.play();
+            document.documentElement.style.setProperty(
+                "--background-color",
+                "#2c2c2c"
+            );
+            document.documentElement.style.setProperty("--text-color", "#FFF");
+            document.documentElement.style.setProperty(
+                "--shadow-color",
+                "rgb(255 255 255 / 10%)"
+            );
+            document.documentElement.style.setProperty(
+                "--button-shadow-color",
+                "rgba(255 255 255 / 40%)"
+            );
+        } else {
+            animation.setDirection(-1);
+            animation.play();
+            document.documentElement.style.setProperty(
+                "--background-color",
+                "#FFF"
+            );
+            document.documentElement.style.setProperty(
+                "--text-color",
+                "#212121"
+            );
+            document.documentElement.style.setProperty(
+                "--shadow-color",
+                "rgba(0, 0, 0, 0.1)"
+            );
+            document.documentElement.style.setProperty(
+                "--button-shadow-color",
+                "rgba(0, 0, 0, 0.4)"
+            );
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isDark]);
+
+    const handleClick = () => setIsDark(!isDark);
+
+    return (
+        <button
+            type="button"
+            title="cambiar esquema de colores"
+            className="change_schema_color"
+            ref={animationElement}
+            onClick={handleClick}
+        ></button>
+    );
+}
+
+export function ModalLive({ isLive }) {
     const animationElement = useRef(null);
 
     useEffect(() => {
-
         lottie.loadAnimation({
             container: animationElement.current,
             renderer: "svg",
@@ -25,15 +101,26 @@ export function ModalLive({ isLive }){
     }, [isLive]);
 
     return (
-        <div className="modal_container live" title="Escuchando al servidor por nuevos colaboradores">
-            <div className={isLive ? "live_animation" : "live_animation error"} ref={animationElement}></div>
+        <div
+            className="modal_container live"
+            title="Escuchando al servidor por nuevos colaboradores"
+        >
+            <div
+                className={isLive ? "live_animation" : "live_animation error"}
+                ref={animationElement}
+            ></div>
             <p className="text">{isLive ? "En Vivo" : "Desconectado"}</p>
         </div>
     );
 }
 
-export default function Modal({ setShowModal, message, title, customClickEvt, isDefault }) {
-
+export default function Modal({
+    setShowModal,
+    message,
+    title,
+    customClickEvt,
+    isDefault,
+}) {
     if (isDefault) {
         message =
             "Parece que estás intentando enviar un formulario con datos vacíos, inténtalo otro día...";
@@ -55,9 +142,7 @@ export default function Modal({ setShowModal, message, title, customClickEvt, is
                 </div>
                 <hr />
                 <div className="content_modal">
-                    <p className="message">
-                        {message}
-                    </p>
+                    <p className="message">{message}</p>
                     {isDefault && (
                         <img
                             src="https://media.tenor.com/KUUtQs-OOHAAAAAM/rana-que-salta-meme-meme-rana.gif"
@@ -91,4 +176,4 @@ Modal.propTypes = {
 
 ModalLive.propTypes = {
     isLive: PropTypes.bool.isRequired,
-}
+};

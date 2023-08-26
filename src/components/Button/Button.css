@@ -15,9 +15,19 @@ button[type="submit"] {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.2s ease-in-out;
 }
 
 button[type="submit"]:hover {
     cursor: pointer;
     color: #95FFD4;
+}
+
+@media screen and (max-width: 425px) {
+    button[type="submit"] {
+        width: 100%;
+    }
 }

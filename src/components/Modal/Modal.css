@@ -1,14 +1,12 @@
 .modal_container {
+    font-family: 'Courier New', Courier, monospace;
     background-color: rgba(0, 0, 0, 0.7);
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     width: 100%;
-    max-width: 50%;
-    min-width: 270px;
     position: fixed;
-    z-index: 1;
     height: 100vh;
-    font-family: 'Courier New', Courier, monospace;
+    z-index: 2;
 }
 
 .modal_container.live {
@@ -42,16 +40,36 @@
     font-size: 1.2rem;
 }
 
+.change_schema_color {
+    all: unset;
+    border-radius: 100%;
+    position: fixed;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    right: 10px;
+    bottom: 20px;
+    z-index: 1;
+    border: 3px solid #fff;
+    background-color: #fff;
+    box-shadow: 1px 4px 10px var(--button-shadow-color);
+}
+
+.lottie_scheme_color > g {
+    transform: translate3d(-66%, -66%, 0px) !important;
+}
+
 .modal {
     position: relative;
     width: calc(100% - 2rem);
-    margin: 1rem;
-    background-color: white;
+    max-width: 700px;
+    min-width: 270px;
+    margin: auto;
+    background-color: var(--background-color);
     box-sizing: border-box;
     border-radius: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: black;
 }
 
 .title_modal h3 {
@@ -67,7 +85,6 @@
     padding: 0 1rem;
     display: flex;
     gap: 8px;
-    color: black;
 }
 
 /* options */

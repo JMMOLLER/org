@@ -8,7 +8,7 @@ import Header from './components/Header/Header'
 import Main from './components/Main/Main'
 import Form from './components/Form'
 import Hero from './components/Hero/Hero'
-import Modal, { ModalLive } from './components/Modal'
+import Modal, { ModalLive, ModalSchemeColor } from './components/Modal'
 import Footer from './components/Footer'
 import LocalDB from './db'
 import propTypes from 'prop-types'
@@ -183,6 +183,7 @@ function App({ isOnline }) {
     <>
       {showModal && Modal({ setShowModal, isDefault: true })}
       <ModalLive isLive={isOnline} />
+      <ModalSchemeColor initialState={new Date().getHours() >= 18 || new Date().getHours() <= 6} />
       <Header>
         <Hero />
       </Header>

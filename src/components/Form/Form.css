@@ -2,11 +2,10 @@ form {
     display: flex;
     flex-direction: column;
     gap: 26px;
-    background-color: #f6f6f6;
     width: 58.8451%;
     margin: 0 auto;
     border-radius: 20px;
-    box-shadow: 9px 7px 15px 9px rgba(0, 0, 0, 0.08);
+    box-shadow: 5px 3px 15px 9px var(--shadow-color);
     padding: 35px 95px;
     box-sizing: border-box;
     position: relative;
@@ -39,7 +38,7 @@ form {
     cursor: pointer;
     border: 3px solid #fff;
     border-radius: 100%;
-    box-shadow: 1px 4px 10px rgb(0, 0, 0, 0.4);
+    box-shadow: 1px 4px 10px var(--button-shadow-color);
     transform: translate(-5%, -50%);
     outline: none;
 }

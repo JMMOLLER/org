@@ -1,4 +1,4 @@
-import "./InputComponents.css";
+import "./Input.css";
 import { useState } from "react";
 import propTypes from "prop-types";
 
@@ -16,6 +16,7 @@ export function InputText(props /*: props*/) {
                 name={props.name}
                 id={props.id}
                 onChange={handleChnage}
+                autoComplete="off"
                 value={props.value}
                 required={props.isRequired}
             />

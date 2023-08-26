@@ -10,13 +10,19 @@
 :root {
   --heightAnimation: 0px;
   --sky-blue: #6278F7;
+  --background-color: #FFF;
+  --text-color: #212121;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --button-shadow-color: rgba(0, 0, 0, 0.4);
+  color-scheme: light dark;
   font-family: 'Prata', sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  color: #212121;
+  color: var(--text-color);
+  background-color: var(--background-color);
   color-scheme: light dark;
-  background-color: #FFF;
+  transition: all 0.3s ease-in-out;
 }
 
 html {

@@ -32,6 +32,8 @@ footer {
 .container_logo img {
     width: auto;
     height: 72px;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .container_comment .comment {

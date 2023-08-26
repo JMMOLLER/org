@@ -10,10 +10,8 @@ export default function Root() {
     CM.addObserver(setIsOnline);
 
     return (
-        <React.StrictMode>
-            <ApolloProvider client={client}>
-                <App isOnline={isOnline} />
-            </ApolloProvider>
-        </React.StrictMode>
+        <ApolloProvider client={client}>
+            <App isOnline={isOnline} />
+        </ApolloProvider>
     );
 }
