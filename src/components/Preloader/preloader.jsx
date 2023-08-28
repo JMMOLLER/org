@@ -14,7 +14,7 @@ function Preloader({
 }) {
     const preloaderRef = useRef(null);
     const textRef = useRef(null);
-    const [text, setText] = useState(t('loader'));
+    const [text, setText] = useState(t('loader.text_1'));
 
     useEffect(() => {
         if (loadingHelpers && loadingTeams) return;
@@ -62,9 +62,9 @@ function Preloader({
                             handleAnimationText();
                             isFirstChange = true;
                         }
-                        return "Está tardando un poco más de lo esperado";
+                        return t('loader.text_2');
                     }
-                    return t('loader');
+                    return t('loader.text_1');
                 }else {
                     return text;
                 }

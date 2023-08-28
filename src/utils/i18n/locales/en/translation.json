@@ -98,5 +98,8 @@
             "text_6": "Disconnected"
         }
     },
-    "loader": "Loading"
+    "loader": {
+        "text_1": "Loading",
+        "text_2": "Is taking a bit longer than expected."
+    }
 }

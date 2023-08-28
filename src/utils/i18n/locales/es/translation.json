@@ -98,5 +98,8 @@
             "text_6": "Desconectado"
         }
     },
-    "loader": "Cargando"
+    "loader": {
+        "text_1": "Cargando",
+        "text_2": "Está tardando un poco más de lo esperado"
+    }
 }
