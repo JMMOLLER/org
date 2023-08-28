@@ -10,12 +10,12 @@
 - ✅ Implementación de modales para proporcionar interacciones contextuales intuitivas.
 - ✅ Agregar y remover equipos con una interfaz fácil de usar.
 - ✅ Actualización de estados en tiempo real para mantener la coherencia de la información.
-- 🔜 Página multilenguage. *(pendiente)* (En próximas versiones agregaré)
+- ✅ Página multilenguage con i18next. *(EN/ES)*
 - ✅ Diseño de componentes mantenibles para facilitar el desarrollo y la escalabilidad.
 - ✅ Transiciones suaves para mejorar la experiencia del usuario.
 - ✅ Integración de animaciones Lottie para dar vida a la interfaz.
 - ✅ Patrones de diseño Observer y Singleton.
-- 🔜 Modos de visualización (oscuro/claro).
+- ✅ Modos de visualización (oscuro/claro).
 - ✅ Reconexion con el servidor Backend.
 
 ## 📸 Capturas de Pantalla

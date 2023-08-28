@@ -17,6 +17,8 @@ import './App.css'
 
 function App({ isOnline }) {
 
+  // NOTE: This could be abstracted to a custom hook
+
   const QUERY_HELPERS = gql`${fetchGQPL.buildQueryAllHelpers}`;
   const QUERY_TEAMS = gql`${fetchGQPL.buildQueryAllTeams}`;
   const SUBSCRIPTION_HELPERS = gql`${fetchGQPL.buildSubscriptionHelper}`;
@@ -35,6 +37,8 @@ function App({ isOnline }) {
   const [showModal, setShowModal] = useState({ show: false, payload: {}});
   const [isRendered, setIsRendered] = useState(false);
   const [showPreloader, setShowPreloader] = useState(true);
+  const [animation, setAnimation] = useState(null);
+  const [isDark, setIsDark] = useState(new Date().getHours() >= 18 || new Date().getHours() <= 6);
   const nodeOrgRef = useRef(null);
   const preloaderRef = useRef(null);
   const { t, i18n } = useTranslation();
@@ -65,6 +69,72 @@ function App({ isOnline }) {
     i18n.changeLanguage(localStorage.getItem("i18nextLng") || "es");
     document.documentElement.lang = i18n.language;
   }, [i18n]);
+
+  useEffect(() => {
+    handleSchemeMode(isDark, animation);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDark]);
+
+  const handleSchemeMode = (isDark, animation) => {
+    if (isDark) {
+      if(animation) {
+        animation.setDirection(1);
+        animation.play();
+      }
+      const properties = [
+        {
+          name: "--background-color",
+          value: "#2c2c2c",
+        },
+        {
+          name: "--text-color",
+          value: "#FFF",
+        },
+        {
+          name: "--shadow-color",
+          value: "rgb(255 255 255 / 10%)",
+        },
+        {
+          name: "--button-shadow-color",
+          value: "rgba(255 255 255 / 40%)",
+        }
+      ]
+      handleToggleSchemaColor(properties);
+    } else {
+      if(animation){
+        animation.setDirection(-1);
+        animation.play();
+      }
+      const properties = [
+        {
+          name: "--background-color",
+          value: "#FFF",
+        },
+        {
+          name: "--text-color",
+          value: "#212121",
+        },
+        {
+          name: "--shadow-color",
+          value: "rgba(0, 0, 0, 0.1)",
+        },
+        {
+          name: "--button-shadow-color",
+          value: "rgba(0, 0, 0, 0.4)",
+        }
+      ]
+      handleToggleSchemaColor(properties);
+    }
+  }
+
+  const handleToggleSchemaColor = (properties) => {
+    properties.forEach((property) => {
+      document.documentElement.style.setProperty(
+        property.name,
+        property.value
+      );
+    });
+  };
 
   useEffect(() => {
     if (loading) return;
@@ -212,7 +282,7 @@ function App({ isOnline }) {
     <>
       {showModal.show && Modal({ setShowModal, payload: showModal.payload, easterEgg: showModal.easterEgg })}
       <ModalLive isLive={isOnline} t={t} />
-      <ModalSchemeColor initialState={new Date().getHours() >= 18 || new Date().getHours() <= 6} t={t} />
+      <ModalSchemeColor isDark={isDark} setIsDark={setIsDark} handleSchemeMode={handleSchemeMode} animation={animation} setAnimation={setAnimation} t={t} />
       <Hero lngs={lngs} i18n={i18n} t={t} />
       <Main>
         <Form

@@ -1,7 +1,7 @@
 {
   "name": "org",
   "private": true,
-  "version": "1.0.17",
+  "version": "1.0.18",
   "type": "module",
   "description": "Mi Proyecto Web en React y Vite: una muestra de desarrollo moderno con cortocircuitos lógicos, modales intuitivos y más.",
   "keywords": [
