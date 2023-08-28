@@ -10,10 +10,11 @@ function Preloader({
     setShowPreloader,
     loadingHelpers,
     loadingTeams,
+    t,
 }) {
     const preloaderRef = useRef(null);
     const textRef = useRef(null);
-    const [text, setText] = useState("Cargando");
+    const [text, setText] = useState(t('loader'));
 
     useEffect(() => {
         if (loadingHelpers && loadingTeams) return;
@@ -63,7 +64,7 @@ function Preloader({
                         }
                         return "Está tardando un poco más de lo esperado";
                     }
-                    return "Cargando";
+                    return t('loader');
                 }else {
                     return text;
                 }
@@ -81,6 +82,7 @@ function Preloader({
             clearInterval(intervalId_1);
             clearInterval(intervalId_2);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -97,6 +99,7 @@ Preloader.propTypes = {
     setShowPreloader: propTypes.func.isRequired,
     loadingHelpers: propTypes.bool.isRequired,
     loadingTeams: propTypes.bool.isRequired,
+    t: propTypes.func.isRequired,
 };
 
 export default Preloader;

@@ -1,3 +1,6 @@
+header {
+    border-bottom:4px solid #6278F7;
+}
 .hero {
     display: flex;
     justify-content: space-between;
@@ -49,6 +52,92 @@
     width: 517px;
     height: auto;
 }
+
+
+.select_lang_container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+.btn_lang {
+    all: unset;
+    height: 48px;
+    width: 48px;
+    cursor: pointer;
+    background-color: var(--background-color);
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 4px var(--shadow-color);
+}
+.btn_lang > img {
+    height: 40px;
+    width: 40px;
+}
+.btn_lang:hover + .select_lang, .select_lang:hover {
+    display: block;
+}
+
+.select_lang {
+    display: none;
+    position: relative;
+    width: -moz-fit-content;
+    width: fit-content;
+    border-radius: 7%;
+    padding-top: 15px;
+}
+.select_lang::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 5px;
+    right: 5px;
+    background-color: var(--background-color);
+    transform: rotate(45deg);
+    z-index: 0;
+}
+.lang_list_container {
+    position: relative;
+    display: flex;
+    width: -moz-fit-content;
+    width: fit-content;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: var(--background-color);
+    z-index: 1;
+}
+.lang_list_container > hr {
+    width: calc(100% - 2px);
+    margin: 0;
+}
+.lang_list_container > hr:last-child {
+    display: none;
+}
+.lang_list_container > li {
+    margin-top: -1px;
+    padding: 0 10px;
+    padding-top: 1px;
+    transition: background-color 0.2s ease-in-out;
+}
+.lang_option {
+    all: unset;
+    cursor: pointer;
+    color: var(--text-color);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    text-decoration: none;
+}
+.lang_list_container > li:hover {
+    background-color: #6278F7;
+}
+
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .hero_content_left {

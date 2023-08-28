@@ -10,6 +10,7 @@ export default function Team({
     deleteHelper,
     changeTeamColor,
     isPreview,
+    t,
 }) {
     // const urlImg = "https://avatars.githubusercontent.com/u/86493703?v=4";
     const [parent] = useAutoAnimate();
@@ -32,7 +33,7 @@ export default function Team({
                     {!isPreview && (
                         <input
                             type="color"
-                            title="Cambiar color del equipo"
+                            title={t('team_section.input')}
                             className="color-picker"
                             value={dataTeam.colors.primary}
                             onChange={handleChangeColor}
@@ -54,6 +55,7 @@ export default function Team({
                             dataHelper={helper}
                             deleteHelper={deleteHelper}
                             isPreview={isPreview}
+                            t={t}
                         />
                     ))}
                 </section>
@@ -68,4 +70,5 @@ Team.propTypes = {
     deleteHelper: PropTypes.func.isRequired,
     changeTeamColor: PropTypes.func.isRequired,
     isPreview: PropTypes.bool,
+    t: PropTypes.func.isRequired,
 };

@@ -3,32 +3,7 @@ import { split, HttpLink } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
-
-
-export class ConnectionManager {
-  static instance;
-  constructor() {
-    console.log('ConnectionManager is initialized');
-    this.observers = [];
-  }
-
-  addObserver(observer) {
-    this.observers.push(observer);
-  }
-
-  notifyObservers(value) {
-    this.observers.forEach((setValue) => {
-      setValue(value);
-    });
-  }
-
-  static getInstance() {
-    if (!this.instance) {
-      this.instance = new ConnectionManager();
-    }
-    return this.instance;
-  }
-}
+import ConnectionManager from '../utils/connectionManager';
 
 const httpLink = new HttpLink({
   uri: import.meta.env.VITE_API_GRAPHQL_URL
@@ -72,6 +47,7 @@ const splitLink = split(
 const client = new ApolloClient({
   link: splitLink,
   cache: new InMemoryCache(),
+  connectToDevTools: false,
 });
 
 export default client;

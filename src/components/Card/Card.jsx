@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 
 import PropTypes from "prop-types";
 
-export default function Card({ dataHelper, bgColor, deleteHelper, isPreview }) {
+export default function Card({ dataHelper, bgColor, deleteHelper, isPreview, t }) {
     const deleteIconRef = useRef(null);
     const likeIconRef = useRef(null);
     const lottieInstanceDelete = useRef(null);
@@ -38,6 +38,7 @@ export default function Card({ dataHelper, bgColor, deleteHelper, isPreview }) {
                 lottieInstanceLike.current.destroy();
             }
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleClick = (e) => {
@@ -77,7 +78,7 @@ export default function Card({ dataHelper, bgColor, deleteHelper, isPreview }) {
                     ref={deleteIconRef}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
-                    title="eliminar colaborador"
+                    title={t('team_section.card.delete')}
                 ></button>
             )}
             <div className="header_card" style={{ backgroundColor: bgColor }}>
@@ -86,7 +87,7 @@ export default function Card({ dataHelper, bgColor, deleteHelper, isPreview }) {
                     className="icon like"
                     onClick={handleClick}
                     ref={likeIconRef}
-                    title="Agregar a me gusta"
+                    title={t('team_section.card.like')}
                 ></button>
             )}
                 <img src={dataHelper.photo} alt={"image profile"} />
@@ -104,4 +105,5 @@ Card.propTypes = {
     bgColor: PropTypes.string.isRequired,
     deleteHelper: PropTypes.func.isRequired,
     isPreview: PropTypes.bool,
+    t: PropTypes.func.isRequired,
 };

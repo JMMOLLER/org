@@ -12,6 +12,7 @@ export default function OrgTitle(props) {
         nodeOrgRef,
         deleteHelper,
         changeTeamColor,
+        t,
     } = props;
 
     useEffect(() => {
@@ -57,12 +58,12 @@ export default function OrgTitle(props) {
     return (
         <section className="section_teams init" ref={nodeOrgRef}>
             <div className="teams_header">
-                <h3>Mi Organización</h3>
+                <h3>{t('org_section.title')}</h3>
                 <button
                     type="button"
                     aria-label="toggle form"
                     onClick={handleClick}
-                    title="alternar mostrar formulario"
+                    title={!showForm ? t('org_section.button.text_1') : t('org_section.button.text_2') }
                 ></button>
             </div>
             {teams.map((team) => (
@@ -74,6 +75,7 @@ export default function OrgTitle(props) {
                     dataTeam={team}
                     deleteHelper={deleteHelper}
                     changeTeamColor={changeTeamColor}
+                    t={t}
                 />
             ))}
         </section>
@@ -88,4 +90,5 @@ OrgTitle.propTypes = {
     nodeOrgRef: PropTypes.shape({ current: PropTypes.any }),
     deleteHelper: PropTypes.func.isRequired,
     changeTeamColor: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
 };

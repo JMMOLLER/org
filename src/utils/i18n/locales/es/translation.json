@@ -1,0 +1,102 @@
+{
+    "hero": {
+        "title": "Personas y Equipos",
+        "subtitle": "Organizados en un solo lugar.",
+        "alt": {
+            "logo": "logo de la página web",
+            "hero": "imagen de personas trabajando en equipo",
+            "button": "Cambiar el idioma"
+        }
+    },
+    "form_helpers": {
+        "title": "Rellena el formulario para añadir un nuevo colaborador",
+        "toggle_form": "alternar formulario",
+        "input": {
+            "name": {
+                "label": "Nombre",
+                "placeholder": "Ingrese el nombre"
+            },
+            "position": {
+                "label": "Puesto",
+                "placeholder": "Ingrese el puesto"
+            },
+            "photo": {
+                "label": "Foto",
+                "placeholder": "Ingrese la url de la foto"
+            },
+            "team": {
+                "label": "Equipo",
+                "placeholder": "Seleccione el equipo"
+            }
+        },
+        "button": {
+            "value": "Añadir colaborador",
+            "alt": "Botón añadir colaborador"
+        }
+    },
+    "form_teams": {
+        "title": "Rellena el formulario para añadir un nuevo equipo",
+        "input": {
+            "name": {
+                "label": "Nombre del equipo",
+                "placeholder": "Ingrese el nombre de su equipo"
+            },
+            "color": {
+                "label": "Color destacado",
+                "placeholder": "Seleccione un color"
+            }
+        },
+        "button": {
+            "value": "Crear equipo",
+            "alt": "Botón crear equipo"
+        },
+        "preview": {
+            "name": "Tu Nombre",
+            "position": "Esta es una tarjeta de ejemplo"
+        }
+    },
+    "org_section": {
+        "title": "Mi Organización",
+        "button": {
+            "text_1": "Mostrar formulario",
+            "text_2": "Ocultar formulario"
+        }
+    },
+    "team_section": {
+        "input": "Cambiar color del equipo",
+        "card": {
+            "delete": "Eliminar colaborador",
+            "like": "Agregar a me gusta"
+        }
+    },
+    "footer": {
+        "comment": "Desarrollado por Jorge Moreno",
+        "link": {
+            "alt_1": "Ir a mi perfil de LinkedIn",
+            "alt_2": "Ir a mi perfil de GitHub",
+            "alt_3": "Ir a mi portafolio web"
+        }
+    },
+    "modal": {
+        "button": "De acuerdo",
+        "title": {
+            "text_1": "⚠️ ¡Vaya, vaya..!",
+            "text_2": "✅ ¡Equipo creado!",
+            "text_3": "⚠️ ¡Ups!"
+        },
+        "message": {
+            "text_1": "Parece que estás intentando enviar un formulario con datos vacíos, inténtalo otro día...",
+            "text_2": "Ahora puedes añadir colaboradores a tu nuevo equipo.",
+            "text_3": "No se pudo cargar los datos de los colaboradores y equipos pero no te preocupes, vamos a usar los datos locales 🙂."
+        },
+        "alt": {
+            "text_1": "Estás conectado con el Bakcend",
+            "text_2": "No tienes conexión con el Backend",
+            "text_3": "Cambiar a modo oscuro",
+            "text_4": "Cambiar a modo claro",
+            "text_5": "En Vivo",
+            "text_6": "Desconectado"
+        }
+    },
+    "loader": "Cargando"
+}

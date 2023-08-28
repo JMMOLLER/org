@@ -51,7 +51,7 @@ export function InputSelect(props) {
                 value={props.value}
             >
                 <option value="" disabled={active}>
-                    Seleccionar equipo
+                    {props.t("form_helpers.input.team.placeholder")}
                 </option>
                 {props.optionsTeams.map((team, index) => 
                     <option key={index} value={team.id}>
@@ -82,4 +82,5 @@ InputSelect.propTypes = {
     setValue: propTypes.func.isRequired,
     isRequired: propTypes.bool.isRequired,
     optionsTeams: propTypes.array.isRequired,
+    t: propTypes.func.isRequired,
 };

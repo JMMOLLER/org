@@ -5,7 +5,7 @@ import liveAnimation from "../../assets/lottie/live-animation.json";
 import schemeColorAnimation from "../../assets/lottie/dark_light-animation.json";
 import PropTypes from "prop-types";
 
-export function ModalSchemeColor() {
+export function ModalSchemeColor({ t }) {
     const animationElement = useRef(null);
     const [isDark, setIsDark] = useState(false);
     let [animation, setAnimation] = useState(null);
@@ -73,7 +73,7 @@ export function ModalSchemeColor() {
     return (
         <button
             type="button"
-            title="cambiar esquema de colores"
+            title={isDark ? t('modal.alt.text_4') : t('modal.alt.text_3')}
             className="change_schema_color"
             ref={animationElement}
             onClick={handleClick}
@@ -81,7 +81,7 @@ export function ModalSchemeColor() {
     );
 }
 
-export function ModalLive({ isLive }) {
+export function ModalLive({ isLive, t }) {
     const animationElement = useRef(null);
 
     useEffect(() => {
@@ -103,19 +103,19 @@ export function ModalLive({ isLive }) {
     return (
         <div
             className="modal_container live"
-            title="Escuchando al servidor por nuevos colaboradores"
+            title={isLive ? t('modal.alt.text_1') : t('modal.alt.text_2')}
         >
             <div
                 className={isLive ? "live_animation" : "live_animation error"}
                 ref={animationElement}
             ></div>
-            <p className="text">{isLive ? "En Vivo" : "Desconectado"}</p>
+            <p className="text">{isLive ? t('modal.alt.text_5') : t('modal.alt.text_6')}</p>
         </div>
     );
 }
 
 export default function Modal({ setShowModal, payload, easterEgg }) {
-    let { message, title, customClickEvt } = payload;
+    let { message, title, button, customClickEvt } = payload;
 
     const handleClick = () => {
         setShowModal(false);
@@ -148,7 +148,7 @@ export default function Modal({ setShowModal, payload, easterEgg }) {
                         className="btn_modal"
                         onClick={handleClick}
                     >
-                        Entiendo
+                        { button }
                     </button>
                 </div>
             </div>
@@ -164,4 +164,9 @@ Modal.propTypes = {
 
 ModalLive.propTypes = {
     isLive: PropTypes.bool.isRequired,
+    t: PropTypes.func.isRequired,
 };
+
+ModalSchemeColor.propTypes = {
+    t: PropTypes.func.isRequired,
+}

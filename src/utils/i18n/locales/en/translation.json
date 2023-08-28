@@ -1,0 +1,102 @@
+{
+    "hero": {
+        "title": "People and Teams",
+        "subtitle": "Organized in one place.",
+        "alt": {
+            "logo": "website logo",
+            "hero": "image of people working as a team",
+            "button": "Change the language"
+        }
+    },
+    "form_helpers": {
+        "title": "Fill out the form to add a new collaborator",
+        "toggle_form": "toggle form",
+        "input": {
+            "name": {
+                "label": "Name",
+                "placeholder": "Enter the name"
+            },
+            "position": {
+                "label": "Position",
+                "placeholder": "Enter the position"
+            },
+            "photo": {
+                "label": "Photo",
+                "placeholder": "Enter the photo url"
+            },
+            "team": {
+                "label": "Team",
+                "placeholder": "Select the team"
+            }
+        },
+        "button": {
+            "value": "Add collaborator",
+            "alt": "Add collaborator button"
+        }
+    },
+    "form_teams": {
+        "title": "Fill out the form to add a new team",
+        "input": {
+            "name": {
+                "label": "Team name",
+                "placeholder": "Enter your team name"
+            },
+            "color": {
+                "label": "Featured color",
+                "placeholder": "Select a color"
+            }
+        },
+        "button": {
+            "value": "Create team",
+            "alt": "Create team button"
+        },
+        "preview": {
+            "name": "Your Name",
+            "position": "This is an example card"
+        }
+    },
+    "org_section": {
+        "title": "My Organization",
+        "button": {
+            "text_1": "Show form",
+            "text_2": "Hide form"
+        }
+    },
+    "team_section": {
+        "input": "Change team color",
+        "card": {
+            "delete": "Delete collaborator",
+            "like": "Add to like"
+        }
+    },
+    "footer": {
+        "comment": "Developed by Jorge Moreno",
+        "link": {
+            "alt_1": "Go to my LinkedIn profile",
+            "alt_2": "Go to my GitHub profile",
+            "alt_3": "Go to my web portfolio"
+        }
+    },
+    "modal": {
+        "button": "Ok",
+        "title": {
+            "text_1": "⚠️ Oh, well..!",
+            "text_2": "✅ Team created!",
+            "text_3": "⚠️ Oops!"
+        },
+        "message": {
+            "text_1": "It seems that you are trying to send a form with empty data, try another day...",
+            "text_2": "Now you can add collaborators to your new team.",
+            "text_3": "The data of the collaborators and teams could not be loaded but don't worry, we are going to use the local data 🙂."
+        },
+        "alt": {
+            "text_1": "You are connected to the Backend",
+            "text_2": "You don't have a connection with the Backend",
+            "text_3": "Change to dark mode",
+            "text_4": "Change to light mode",
+            "text_5": "Live",
+            "text_6": "Disconnected"
+        }
+    },
+    "loader": "Loading"
+}

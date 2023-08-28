@@ -4,7 +4,6 @@ import { gql, useQuery, useSubscription, useMutation } from "@apollo/client";
 import * as fetchGQPL from './Apollo/queryBuilders'
 import Preloader from './components/Preloader/preloader'
 import OrgTitle from './components/Org'
-import Header from './components/Header/Header'
 import Main from './components/Main/Main'
 import Form from './components/Form'
 import Hero from './components/Hero/Hero'
@@ -12,6 +11,8 @@ import Modal, { ModalLive, ModalSchemeColor } from './components/Modal'
 import Footer from './components/Footer'
 import LocalDB from './db'
 import propTypes from 'prop-types'
+import { useTranslation } from "react-i18next";
+import { lngs } from './utils/i18n/i18n';
 import './App.css'
 
 function App({ isOnline }) {
@@ -36,6 +37,8 @@ function App({ isOnline }) {
   const [showPreloader, setShowPreloader] = useState(true);
   const nodeOrgRef = useRef(null);
   const preloaderRef = useRef(null);
+  const { t, i18n } = useTranslation();
+  
   const {
     loading: loadingHelpers,
     error: errorHelpers,
@@ -57,6 +60,11 @@ function App({ isOnline }) {
 
 
   const { data, loading, error } = useSubscription(SUBSCRIPTION_HELPERS);
+
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("i18nextLng") || "es");
+    document.documentElement.lang = i18n.language;
+  }, [i18n]);
 
   useEffect(() => {
     if (loading) return;
@@ -108,8 +116,9 @@ function App({ isOnline }) {
       setShowModal({
         show: true,
         payload: {
-          message: "No se pudo cargar los datos de los colaboradores y equipos pero no te preocupes, vamos a usar los datos locales 🙂.",
-          title: "⚠️ ¡Ups!",
+          title: t('modal.title.text_3'),
+          message: t('modal.message.text_3'),
+          button: t('modal.button'),
           customClickEvt: () => {setShowPreloader(false)}
         }
       });
@@ -192,6 +201,7 @@ function App({ isOnline }) {
             setShowPreloader={setShowPreloader}
             loadingHelpers={loadingHelpers}
             loadingTeams={loadingTeams}
+            t={t}
           />
         </div>
       </CSSTransition>
@@ -201,11 +211,9 @@ function App({ isOnline }) {
   return (
     <>
       {showModal.show && Modal({ setShowModal, payload: showModal.payload, easterEgg: showModal.easterEgg })}
-      <ModalLive isLive={isOnline} />
-      <ModalSchemeColor initialState={new Date().getHours() >= 18 || new Date().getHours() <= 6} />
-      <Header>
-        <Hero />
-      </Header>
+      <ModalLive isLive={isOnline} t={t} />
+      <ModalSchemeColor initialState={new Date().getHours() >= 18 || new Date().getHours() <= 6} t={t} />
+      <Hero lngs={lngs} i18n={i18n} t={t} />
       <Main>
         <Form
           showForm={showForm}
@@ -216,6 +224,7 @@ function App({ isOnline }) {
           setShowModal={setShowModal}
           generateBgColor={generateBgColor}
           setDataTeams={setDataTeams}
+          t={t}
         />
         <OrgTitle
           showForm={showForm}
@@ -225,9 +234,10 @@ function App({ isOnline }) {
           helpers={helpers}
           deleteHelper={deleteHelper}
           changeTeamColor={changeTeamColor}
+          t={t}
         />
       </Main>
-      <Footer />
+      <Footer t={t} />
     </>
   )
 }
