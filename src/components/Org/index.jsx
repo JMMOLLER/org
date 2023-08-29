@@ -68,7 +68,7 @@ export default function OrgTitle(props) {
             </div>
             {teams.map((team) => (
                 <Team
-                    key={team.teamName}
+                    key={team.id}
                     helpers={helpers.filter(
                         (helper) => helper.team.teamName === team.teamName
                     )}

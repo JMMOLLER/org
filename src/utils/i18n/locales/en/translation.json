@@ -82,12 +82,14 @@
         "title": {
             "text_1": "⚠️ Oh, well..!",
             "text_2": "✅ Team created!",
-            "text_3": "⚠️ Oops!"
+            "text_3": "⚠️ Oops!",
+            "text_4": "⚠️ Error!"
         },
         "message": {
             "text_1": "It seems that you are trying to send a form with empty data, try another day...",
             "text_2": "Now you can add collaborators to your new team.",
-            "text_3": "The data of the collaborators and teams could not be loaded but don't worry, we are going to use the local data 🙂."
+            "text_3": "The data of the collaborators and teams could not be loaded but don't worry, we are going to use the local data 🙂.",
+            "text_4": "An error has occurred while fetching the data team."
         },
         "alt": {
             "text_1": "You are connected to the Backend",

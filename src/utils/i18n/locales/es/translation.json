@@ -82,12 +82,14 @@
         "title": {
             "text_1": "⚠️ ¡Vaya, vaya..!",
             "text_2": "✅ ¡Equipo creado!",
-            "text_3": "⚠️ ¡Ups!"
+            "text_3": "⚠️ ¡Ups!",
+            "text_4": "⚠️ ¡Error!"
         },
         "message": {
             "text_1": "Parece que estás intentando enviar un formulario con datos vacíos, inténtalo otro día...",
             "text_2": "Ahora puedes añadir colaboradores a tu nuevo equipo.",
-            "text_3": "No se pudo cargar los datos de los colaboradores y equipos pero no te preocupes, vamos a usar los datos locales 🙂."
+            "text_3": "No se pudo cargar los datos de los colaboradores y equipos pero no te preocupes, vamos a usar los datos locales 🙂.",
+            "text_4": "Ocurrió un error al intentar obtener la información del equipo."
         },
         "alt": {
             "text_1": "Estás conectado con el Bakcend",

@@ -52,7 +52,7 @@ const buildSubscriptionHelper = buildQuery({
         "position",
         "photo",
         {
-            team: ["teamName"],
+            team: ["id","teamName"],
         },
     ],
 });

@@ -1,3 +1,4 @@
+import Modal, { ModalLive, ModalSchemeColor } from './components/Modal'
 import { useEffect, useRef, useState } from 'react'
 import { CSSTransition } from "react-transition-group";
 import { useTranslation } from "react-i18next";
@@ -9,7 +10,6 @@ import OrgTitle from './components/Org'
 import Main from './components/Main/Main'
 import Form from './components/Form'
 import Hero from './components/Hero/Hero'
-import Modal, { ModalLive, ModalSchemeColor } from './components/Modal'
 import Footer from './components/Footer'
 import propTypes from 'prop-types'
 
@@ -24,6 +24,7 @@ function App({ isOnline }) {
   const [isRendered, setIsRendered] = useState(false);
   const [showPreloader, setShowPreloader] = useState(true);
   const [animation, setAnimation] = useState(null);
+  const newSendHelper = useRef(null);
   const nodeOrgRef = useRef(null);
   const preloaderRef = useRef(null);
   const { t, i18n } = useTranslation();
@@ -50,17 +51,35 @@ function App({ isOnline }) {
     document.documentElement.lang = i18n.language;
   }, [i18n]);
 
+  useEffect(() => {
+    try{
+      const tmp = helpers.find((h) => h.id === newSendHelper.current);
+      if(helpers.length === 0 || !tmp) return;
+      const teamToFocus = dataTeams.find((team) => team.id === tmp.team?.id);
+      const el = document.getElementById(teamToFocus.id);
+      el.scrollIntoView({ behavior: "smooth" });
+    }catch(e){
+      console.error(e);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [helpers]);
+
 
   useEffect(() => {
     document.body.style.overflow = showModal.show ? "hidden" : "";
   }, [showModal]);
 
   const handleRegister = (data) => {
-    if(isOnline){
+    const teamRef = dataTeams.find((team) => team.id === data.teamRef);
+    newSendHelper.current = data.id;
+    if(!teamRef) {
+      setShowModal({ show: true, payload: { message: t('modal.message.text_4'), title: t('modal.title.text_4'), button: t('modal.button')  } });
+    } else if(isOnline && teamRef.__typename) {
       addHelper({ variables: { input: data } });
     } else {
       data.team = {
-        teamName: dataTeams.find((team) => team.id === data.teamRef)?.teamName
+        id: teamRef.id,
+        teamName: teamRef.teamName
       };
       setHelpers([...helpers, data]);
     }
