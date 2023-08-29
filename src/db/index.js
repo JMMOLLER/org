@@ -17,7 +17,7 @@ const db = {
             teamName: "Data Science",
             colors: {
                 primary: "#A6D157",
-                background: "#F0F8E2",
+                background: "#A6D15726",
             },
         },
         {
@@ -25,7 +25,7 @@ const db = {
             teamName: "Programación",
             colors: {
                 primary: "#57c278",
-                background: "#D9F7E9",
+                background: "#DB6EBF26",
             },
         },
         {
@@ -41,7 +41,7 @@ const db = {
             teamName: "Devops",
             colors: {
                 primary: "#E06B69",
-                background: "#F1616526",
+                background: "#E06B6926",
             },
         },
         {
@@ -57,7 +57,7 @@ const db = {
             teamName: "Innovación y Gestión",
             colors: {
                 primary: "#FF8A29",
-                background: "#FF8C2A26",
+                background: "#FF8A2926",
             },
         },
         {
@@ -65,7 +65,7 @@ const db = {
             teamName: "Front End",
             colors: {
                 primary: "#82CFFA",
-                background: "#E8F8FF",
+                background: "#82CFFA26",
             },
         },
     ],
